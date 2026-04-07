@@ -55,7 +55,28 @@
           'Duration': '#8b5cf6',
           'Flags': '#f59e0b',
           'Baseline': '#ef4444',
-          'Merge & Lookup': '#06b6d4'
+          'Merge & Lookup': '#06b6d4',
+          'Parameters': '#ec4899',
+          'Records': '#f97316'
+        },
+        // Lucide icons per group (24x24 viewBox, stroke-based)
+        groupIcons: {
+          // sigma — simple math derivations
+          'Simple Derivations': '<path d="M18 7V4H6l6 8-6 8h12v-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+          // calendar — dates
+          'Dates & Times': '<rect width="18" height="18" x="3" y="4" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+          // timer — duration
+          'Duration': '<path d="M10 2h4M12 14l3-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="14" r="8" fill="none" stroke="currentColor" stroke-width="2"/>',
+          // flag — flags
+          'Flags': '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+          // trending-up — baseline
+          'Baseline': '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+          // git-merge — merge/lookup
+          'Merge & Lookup': '<circle cx="18" cy="18" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="6" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 21V9a9 9 0 0 0 9 9" fill="none" stroke="currentColor" stroke-width="2"/>',
+          // flask-conical — clinical parameters
+          'Parameters': '<path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8.5 2h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+          // rows-3 — records
+          'Records': '<rect width="18" height="18" x="3" y="3" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M3 15h18" fill="none" stroke="currentColor" stroke-width="2"/>'
         },
         onChange: (value) => {
           this.selectedFn = value;
@@ -396,8 +417,7 @@
         label: def.label || fn,
         meta: def.group || null,
         group: def.group || null,
-        description: fn + (def.description ? ' — ' + def.description : ''),
-        icon: def.icon || null
+        description: fn + (def.description ? ' — ' + def.description : '')
       }));
       this._fnSelect.setItems(items);
     }

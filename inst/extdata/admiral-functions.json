@@ -1,47 +1,29 @@
 {
-  "derive_var_chg": {
-    "label": "Change from baseline",
-    "description": "Compute CHG = AVAL - BASE",
+  "derive_vars_atc": {
+    "label": "ATC classification",
+    "description": "Derive ATC classification variables",
     "group": "Simple Derivations",
-    "needs_dataset_add": false,
-    "args": {},
-    "fn_name": "derive_var_chg",
-    "icon": "<path d=\"M4 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-2-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5\"/>"
-  },
-  "derive_var_pchg": {
-    "label": "Percent change",
-    "description": "Compute PCHG = (AVAL - BASE) / BASE * 100",
-    "group": "Simple Derivations",
-    "needs_dataset_add": false,
-    "args": {},
-    "fn_name": "derive_var_pchg",
-    "icon": "<path d=\"M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0M4.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m7 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3\"/>"
-  },
-  "derive_var_trtdurd": {
-    "label": "Treatment duration",
-    "description": "Compute treatment duration in days",
-    "group": "Simple Derivations",
-    "needs_dataset_add": false,
+    "needs_dataset_add": true,
     "args": {
-      "start_date": {
-        "type": "column",
+      "by_vars": {
+        "type": "column-list",
         "required": false,
-        "description": "Treatment start date variable (default: TRTSDT)",
-        "default": null,
-        "arg_name": "start_date",
-        "label": "Treatment start"
+        "description": "By vars",
+        "label": "By vars"
       },
-      "end_date": {
+      "id_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "Id vars",
+        "label": "Id vars"
+      },
+      "value_var": {
         "type": "column",
         "required": false,
-        "description": "Treatment end date variable (default: TRTEDT)",
-        "default": null,
-        "arg_name": "end_date",
-        "label": "Treatment end"
+        "description": "Value var",
+        "label": "Value var"
       }
-    },
-    "fn_name": "derive_var_trtdurd",
-    "icon": "<path d=\"M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z\"/><path d=\"M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0\"/>"
+    }
   },
   "derive_var_age_years": {
     "label": "Age in years",
@@ -73,9 +55,41 @@
         "arg_name": "new_var",
         "label": "Output variable"
       }
-    },
-    "fn_name": "derive_var_age_years",
-    "icon": "<path d=\"M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4c0 1-1 1-1 1z\"/><path fill-rule=\"evenodd\" d=\"M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5\"/>"
+    }
+  },
+  "derive_vars_aage": {
+    "label": "Analysis age",
+    "description": "Derive analysis age variables",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {
+      "start_date": {
+        "type": "column",
+        "required": false,
+        "description": "Start date",
+        "label": "Start date"
+      },
+      "end_date": {
+        "type": "column",
+        "required": false,
+        "description": "End date",
+        "label": "End date"
+      },
+      "age_unit": {
+        "type": "column",
+        "required": false,
+        "description": "Age unit",
+        "label": "Age unit",
+        "default": "YEARS"
+      },
+      "type": {
+        "type": "text",
+        "required": false,
+        "description": "Type",
+        "label": "Type",
+        "default": "interval"
+      }
+    }
   },
   "derive_var_analysis_ratio": {
     "label": "Analysis ratio",
@@ -107,9 +121,434 @@
         "arg_name": "new_var",
         "label": "Ratio variable"
       }
-    },
-    "fn_name": "derive_var_analysis_ratio",
-    "icon": "<path d=\"M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-3h4v-1H2V8h4V7H2V4h4V3H2V1h4V0zm9 11h6v1h-6zm0-4h6v1h-6zm0-4h6v1h-6z\"/>"
+    }
+  },
+  "derive_vars_cat": {
+    "label": "Categorization",
+    "description": "Derive categorization variables from definitions",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {
+      "definition": {
+        "type": "text",
+        "required": true,
+        "description": "Definition",
+        "label": "Definition"
+      },
+      "by_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "By vars",
+        "label": "By vars"
+      }
+    }
+  },
+  "derive_var_chg": {
+    "label": "Change from baseline",
+    "description": "Compute CHG = AVAL - BASE",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {}
+  },
+  "derive_var_dthcaus": {
+    "label": "Death cause",
+    "description": "Derive cause of death from multiple sources",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {
+      "subject_keys": {
+        "type": "column-list",
+        "required": false,
+        "description": "Subject keys",
+        "label": "Subject keys"
+      }
+    }
+  },
+  "derive_var_atoxgr_dir": {
+    "label": "Directional toxicity",
+    "description": "Derive directional analysis toxicity grade",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {
+      "new_var": {
+        "type": "column",
+        "required": true,
+        "description": "New var",
+        "label": "New var"
+      },
+      "tox_description_var": {
+        "type": "column",
+        "required": true,
+        "description": "Tox description var",
+        "label": "Tox description var"
+      },
+      "meta_criteria": {
+        "type": "text",
+        "required": true,
+        "description": "Meta criteria",
+        "label": "Meta criteria"
+      },
+      "criteria_direction": {
+        "type": "enum",
+        "required": true,
+        "description": "Criteria direction",
+        "label": "Criteria direction",
+        "values": [
+          {
+            "value": "L",
+            "label": "Low",
+            "description": "Low direction"
+          },
+          {
+            "value": "H",
+            "label": "High",
+            "description": "High direction"
+          }
+        ]
+      },
+      "abnormal_indicator": {
+        "type": "column",
+        "required": false,
+        "description": "Abnormal indicator",
+        "label": "Abnormal indicator"
+      },
+      "high_indicator": {
+        "type": "column",
+        "required": false,
+        "description": "High indicator",
+        "label": "High indicator"
+      },
+      "low_indicator": {
+        "type": "column",
+        "required": false,
+        "description": "Low indicator",
+        "label": "Low indicator"
+      },
+      "get_unit_expr": {
+        "type": "expr",
+        "required": true,
+        "description": "Get unit expr",
+        "label": "Get unit expr"
+      },
+      "signif_dig": {
+        "type": "numeric",
+        "required": false,
+        "description": "Signif dig",
+        "label": "Signif dig",
+        "default": 15
+      }
+    }
+  },
+  "derive_var_nfrlt": {
+    "label": "Nominal relative time",
+    "description": "Derive nominal relative time from first dose",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {
+      "new_var": {
+        "type": "column",
+        "required": false,
+        "description": "New var",
+        "label": "New var"
+      },
+      "new_var_unit": {
+        "type": "column",
+        "required": false,
+        "description": "New var unit",
+        "label": "New var unit"
+      },
+      "out_unit": {
+        "type": "text",
+        "required": false,
+        "description": "Out unit",
+        "label": "Out unit",
+        "default": "HOURS"
+      },
+      "tpt_var": {
+        "type": "column",
+        "required": false,
+        "description": "Tpt var",
+        "label": "Tpt var"
+      },
+      "visit_day": {
+        "type": "numeric",
+        "required": true,
+        "description": "Visit day",
+        "label": "Visit day"
+      },
+      "first_dose_day": {
+        "type": "numeric",
+        "required": false,
+        "description": "First dose day",
+        "label": "First dose day",
+        "default": 1
+      },
+      "treatment_duration": {
+        "type": "numeric",
+        "required": false,
+        "description": "Treatment duration",
+        "label": "Treatment duration",
+        "default": 0
+      },
+      "range_method": {
+        "type": "enum",
+        "required": false,
+        "description": "Range method",
+        "label": "Range method",
+        "default": "midpoint",
+        "values": [
+          {
+            "value": "method1",
+            "label": "Method 1",
+            "description": "Standard"
+          },
+          {
+            "value": "method2",
+            "label": "Method 2",
+            "description": "Alternative"
+          }
+        ]
+      },
+      "set_values_to_na": {
+        "type": "expr",
+        "required": false,
+        "description": "Set values to na",
+        "label": "Set values to na"
+      }
+    }
+  },
+  "derive_var_pchg": {
+    "label": "Percent change",
+    "description": "Compute PCHG = (AVAL - BASE) / BASE * 100",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {}
+  },
+  "derive_vars_period": {
+    "label": "Period variables",
+    "description": "Derive period/subperiod variables",
+    "group": "Simple Derivations",
+    "needs_dataset_add": true,
+    "args": {
+      "new_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "New vars",
+        "label": "New vars"
+      },
+      "subject_keys": {
+        "type": "column-list",
+        "required": false,
+        "description": "Subject keys",
+        "label": "Subject keys"
+      }
+    }
+  },
+  "derive_vars_query": {
+    "label": "Query variables",
+    "description": "Derive query variables from standardized queries",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {
+      "dataset_queries": {
+        "type": "text",
+        "required": true,
+        "description": "Dataset queries",
+        "label": "Dataset queries"
+      }
+    }
+  },
+  "derive_var_shift": {
+    "label": "Shift variable",
+    "description": "Derive shift variable (baseline to post-baseline)",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {
+      "new_var": {
+        "type": "column",
+        "required": true,
+        "description": "New var",
+        "label": "New var"
+      },
+      "from_var": {
+        "type": "column",
+        "required": true,
+        "description": "From var",
+        "label": "From var"
+      },
+      "to_var": {
+        "type": "column",
+        "required": true,
+        "description": "To var",
+        "label": "To var"
+      },
+      "missing_value": {
+        "type": "text",
+        "required": false,
+        "description": "Missing value",
+        "label": "Missing value",
+        "default": "NULL"
+      },
+      "sep_val": {
+        "type": "text",
+        "required": false,
+        "description": "Sep val",
+        "label": "Sep val",
+        "default": " to "
+      }
+    }
+  },
+  "derive_var_atoxgr": {
+    "label": "Toxicity grade",
+    "description": "Derive analysis toxicity grade",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {
+      "lotox_description_var": {
+        "type": "column",
+        "required": false,
+        "description": "Lotox description var",
+        "label": "Lotox description var"
+      },
+      "hitox_description_var": {
+        "type": "column",
+        "required": false,
+        "description": "Hitox description var",
+        "label": "Hitox description var"
+      }
+    }
+  },
+  "derive_var_trtdurd": {
+    "label": "Treatment duration",
+    "description": "Compute treatment duration in days",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {
+      "start_date": {
+        "type": "column",
+        "required": false,
+        "description": "Treatment start date variable (default: TRTSDT)",
+        "default": null,
+        "arg_name": "start_date",
+        "label": "Treatment start"
+      },
+      "end_date": {
+        "type": "column",
+        "required": false,
+        "description": "Treatment end date variable (default: TRTEDT)",
+        "default": null,
+        "arg_name": "end_date",
+        "label": "Treatment end"
+      }
+    }
+  },
+  "derive_vars_dtm_to_dt": {
+    "label": "Datetime to date",
+    "description": "Extract date from datetime variables",
+    "group": "Dates & Times",
+    "needs_dataset_add": false,
+    "args": {
+      "source_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "Datetime variables to convert (e.g., ADTM, ASTDTM)",
+        "default": null,
+        "arg_name": "source_vars",
+        "label": "Source variables"
+      }
+    }
+  },
+  "derive_vars_dtm_to_tm": {
+    "label": "Datetime to time",
+    "description": "Extract time from datetime variables",
+    "group": "Dates & Times",
+    "needs_dataset_add": false,
+    "args": {
+      "source_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "Datetime variables to convert",
+        "default": null,
+        "arg_name": "source_vars",
+        "label": "Source variables"
+      }
+    }
+  },
+  "derive_var_extreme_dt": {
+    "label": "Extreme date",
+    "description": "Derive earliest/latest date across sources",
+    "group": "Dates & Times",
+    "needs_dataset_add": false,
+    "args": {
+      "new_var": {
+        "type": "column",
+        "required": true,
+        "description": "New var",
+        "label": "New var"
+      },
+      "mode": {
+        "type": "enum",
+        "required": true,
+        "description": "Mode",
+        "label": "Mode",
+        "values": [
+          {
+            "value": "first",
+            "label": "First",
+            "description": "Select first record"
+          },
+          {
+            "value": "last",
+            "label": "Last",
+            "description": "Select last record"
+          }
+        ]
+      },
+      "subject_keys": {
+        "type": "column-list",
+        "required": false,
+        "description": "Subject keys",
+        "label": "Subject keys"
+      }
+    }
+  },
+  "derive_var_extreme_dtm": {
+    "label": "Extreme datetime",
+    "description": "Derive earliest/latest datetime across sources",
+    "group": "Dates & Times",
+    "needs_dataset_add": false,
+    "args": {
+      "new_var": {
+        "type": "column",
+        "required": true,
+        "description": "New var",
+        "label": "New var"
+      },
+      "mode": {
+        "type": "enum",
+        "required": true,
+        "description": "Mode",
+        "label": "Mode",
+        "values": [
+          {
+            "value": "first",
+            "label": "First",
+            "description": "Select first record"
+          },
+          {
+            "value": "last",
+            "label": "Last",
+            "description": "Select last record"
+          }
+        ]
+      },
+      "subject_keys": {
+        "type": "column-list",
+        "required": false,
+        "description": "Subject keys",
+        "label": "Subject keys"
+      }
+    }
   },
   "derive_vars_dt": {
     "label": "Parse date",
@@ -262,9 +701,7 @@
         "arg_name": "preserve",
         "label": "Preserve original"
       }
-    },
-    "fn_name": "derive_vars_dt",
-    "icon": "<path d=\"M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z\"/>"
+    }
   },
   "derive_vars_dtm": {
     "label": "Parse datetime",
@@ -445,45 +882,7 @@
         "arg_name": "ignore_seconds_flag",
         "label": "Ignore seconds flag"
       }
-    },
-    "fn_name": "derive_vars_dtm",
-    "icon": "<path d=\"M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z\"/><path d=\"M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z\"/>"
-  },
-  "derive_vars_dtm_to_dt": {
-    "label": "Datetime to date",
-    "description": "Extract date from datetime variables",
-    "group": "Dates & Times",
-    "needs_dataset_add": false,
-    "args": {
-      "source_vars": {
-        "type": "column-list",
-        "required": true,
-        "description": "Datetime variables to convert (e.g., ADTM, ASTDTM)",
-        "default": null,
-        "arg_name": "source_vars",
-        "label": "Source variables"
-      }
-    },
-    "fn_name": "derive_vars_dtm_to_dt",
-    "icon": "<path d=\"M6.646 11.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 0 1 .708.708L7.707 11l1.647 1.646a.5.5 0 0 1-.708.708zM3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z\"/>"
-  },
-  "derive_vars_dtm_to_tm": {
-    "label": "Datetime to time",
-    "description": "Extract time from datetime variables",
-    "group": "Dates & Times",
-    "needs_dataset_add": false,
-    "args": {
-      "source_vars": {
-        "type": "column-list",
-        "required": true,
-        "description": "Datetime variables to convert",
-        "default": null,
-        "arg_name": "source_vars",
-        "label": "Source variables"
-      }
-    },
-    "fn_name": "derive_vars_dtm_to_tm",
-    "icon": "<path d=\"M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z\"/><path d=\"M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0\"/>"
+    }
   },
   "derive_vars_dy": {
     "label": "Study day",
@@ -507,9 +906,7 @@
         "arg_name": "source_vars",
         "label": "Date variables"
       }
-    },
-    "fn_name": "derive_vars_dy",
-    "icon": "<path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/><path d=\"M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0\"/>"
+    }
   },
   "derive_vars_duration": {
     "label": "Duration",
@@ -673,9 +1070,48 @@
         "arg_name": "type",
         "label": "Calculation type"
       }
-    },
-    "fn_name": "derive_vars_duration",
-    "icon": "<path d=\"M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z\"/><path d=\"M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64l.292-.292a.5.5 0 0 1 .708.708l-.4.4A6.5 6.5 0 1 1 6.5 1m0 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11\"/>"
+    }
+  },
+  "derive_vars_crit_flag": {
+    "label": "Criterion flag",
+    "description": "Derive criterion flag variables",
+    "group": "Flags",
+    "needs_dataset_add": false,
+    "args": {
+      "crit_nr": {
+        "type": "numeric",
+        "required": false,
+        "description": "Crit nr",
+        "label": "Crit nr",
+        "default": 1
+      },
+      "condition": {
+        "type": "expr",
+        "required": true,
+        "description": "Condition",
+        "label": "Condition"
+      },
+      "description": {
+        "type": "text",
+        "required": true,
+        "description": "Description",
+        "label": "Description"
+      },
+      "values_yn": {
+        "type": "boolean",
+        "required": false,
+        "description": "Values yn",
+        "label": "Values yn",
+        "default": false
+      },
+      "create_numeric_flag": {
+        "type": "boolean",
+        "required": false,
+        "description": "Create numeric flag",
+        "label": "Create numeric flag",
+        "default": false
+      }
+    }
   },
   "derive_var_extreme_flag": {
     "label": "Extreme flag",
@@ -781,9 +1217,235 @@
         "arg_name": "check_type",
         "label": "Duplicate check"
       }
-    },
-    "fn_name": "derive_var_extreme_flag",
-    "icon": "<path d=\"M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12 12 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A20 20 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a20 20 0 0 0 1.349-.476l.019-.007.004-.002h.001\"/>"
+    }
+  },
+  "derive_var_joined_exist_flag": {
+    "label": "Joined existence flag",
+    "description": "Derive flag from conditions across joined observations",
+    "group": "Flags",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "order": {
+        "type": "column-list",
+        "required": false,
+        "description": "Order",
+        "label": "Order"
+      },
+      "new_var": {
+        "type": "column",
+        "required": true,
+        "description": "New var",
+        "label": "New var"
+      },
+      "tmp_obs_nr_var": {
+        "type": "column",
+        "required": false,
+        "description": "Tmp obs nr var",
+        "label": "Tmp obs nr var"
+      },
+      "join_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "Join vars",
+        "label": "Join vars"
+      },
+      "join_type": {
+        "type": "enum",
+        "required": true,
+        "description": "Join type",
+        "label": "Join type",
+        "values": [
+          {
+            "value": "all",
+            "label": "All",
+            "description": "All observations"
+          },
+          {
+            "value": "after",
+            "label": "After",
+            "description": "After reference"
+          },
+          {
+            "value": "before",
+            "label": "Before",
+            "description": "Before reference"
+          }
+        ]
+      },
+      "first_cond_lower": {
+        "type": "expr",
+        "required": false,
+        "description": "First cond lower",
+        "label": "First cond lower"
+      },
+      "first_cond_upper": {
+        "type": "expr",
+        "required": false,
+        "description": "First cond upper",
+        "label": "First cond upper"
+      },
+      "filter_add": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter add",
+        "label": "Filter add"
+      },
+      "filter_join": {
+        "type": "expr",
+        "required": true,
+        "description": "Filter join",
+        "label": "Filter join"
+      },
+      "true_value": {
+        "type": "text",
+        "required": false,
+        "description": "True value",
+        "label": "True value",
+        "default": "Y"
+      },
+      "false_value": {
+        "type": "text",
+        "required": false,
+        "description": "False value",
+        "label": "False value",
+        "default": null
+      },
+      "check_type": {
+        "type": "enum",
+        "required": false,
+        "description": "Check type",
+        "label": "Check type",
+        "default": "warning",
+        "values": [
+          {
+            "value": "none",
+            "label": "None",
+            "description": "No checks"
+          },
+          {
+            "value": "message",
+            "label": "Message",
+            "description": "Show message"
+          },
+          {
+            "value": "warning",
+            "label": "Warning",
+            "description": "Show warning"
+          },
+          {
+            "value": "error",
+            "label": "Error",
+            "description": "Raise error"
+          }
+        ]
+      }
+    }
+  },
+  "derive_var_merged_exist_flag": {
+    "label": "Merged existence flag",
+    "description": "Derive existence flag by merging another dataset",
+    "group": "Flags",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "new_var": {
+        "type": "column",
+        "required": true,
+        "description": "New var",
+        "label": "New var"
+      },
+      "condition": {
+        "type": "expr",
+        "required": true,
+        "description": "Condition",
+        "label": "Condition"
+      },
+      "true_value": {
+        "type": "text",
+        "required": false,
+        "description": "True value",
+        "label": "True value",
+        "default": "Y"
+      },
+      "false_value": {
+        "type": "text",
+        "required": false,
+        "description": "False value",
+        "label": "False value",
+        "default": null
+      },
+      "missing_value": {
+        "type": "text",
+        "required": false,
+        "description": "Missing value",
+        "label": "Missing value",
+        "default": null
+      },
+      "filter_add": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter add",
+        "label": "Filter add"
+      }
+    }
+  },
+  "derive_var_merged_ef_msrc": {
+    "label": "Merged flag (multi-source)",
+    "description": "Derive existence flag from multiple source datasets",
+    "group": "Flags",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "flag_events": {
+        "type": "text",
+        "required": true,
+        "description": "Flag events",
+        "label": "Flag events"
+      },
+      "new_var": {
+        "type": "column",
+        "required": true,
+        "description": "New var",
+        "label": "New var"
+      },
+      "true_value": {
+        "type": "text",
+        "required": false,
+        "description": "True value",
+        "label": "True value",
+        "default": "Y"
+      },
+      "false_value": {
+        "type": "text",
+        "required": false,
+        "description": "False value",
+        "label": "False value",
+        "default": null
+      },
+      "missing_value": {
+        "type": "text",
+        "required": false,
+        "description": "Missing value",
+        "label": "Missing value",
+        "default": null
+      }
+    }
   },
   "derive_var_anrind": {
     "label": "Normal range indicator",
@@ -807,9 +1469,7 @@
         "arg_name": "use_a1hia1lo",
         "label": "Use A1HI/A1LO"
       }
-    },
-    "fn_name": "derive_var_anrind",
-    "icon": "<path d=\"M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z\"/>"
+    }
   },
   "derive_var_obs_number": {
     "label": "Observation number",
@@ -871,9 +1531,262 @@
         "arg_name": "check_type",
         "label": "Duplicate check"
       }
-    },
-    "fn_name": "derive_var_obs_number",
-    "icon": "<path d=\"M12.438 1.668V7H11.39V2.684h-.051l-1.211.859v-.969l1.262-.906h1.046zM4.5 2h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1\"/>"
+    }
+  },
+  "derive_var_ontrtfl": {
+    "label": "On-treatment flag",
+    "description": "Derive on-treatment flag based on date windows",
+    "group": "Flags",
+    "needs_dataset_add": false,
+    "args": {
+      "new_var": {
+        "type": "column",
+        "required": false,
+        "description": "New var",
+        "label": "New var"
+      },
+      "start_date": {
+        "type": "column",
+        "required": true,
+        "description": "Start date",
+        "label": "Start date"
+      },
+      "end_date": {
+        "type": "column",
+        "required": false,
+        "description": "End date",
+        "label": "End date"
+      },
+      "ref_start_date": {
+        "type": "column",
+        "required": true,
+        "description": "Ref start date",
+        "label": "Ref start date"
+      },
+      "ref_end_date": {
+        "type": "column",
+        "required": false,
+        "description": "Ref end date",
+        "label": "Ref end date"
+      },
+      "ref_end_window": {
+        "type": "numeric",
+        "required": false,
+        "description": "Ref end window",
+        "label": "Ref end window",
+        "default": 0
+      },
+      "ignore_time_for_ref_end_date": {
+        "type": "boolean",
+        "required": false,
+        "description": "Ignore time for ref end date",
+        "label": "Ignore time for ref end date",
+        "default": true
+      },
+      "filter_pre_timepoint": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter pre timepoint",
+        "label": "Filter pre timepoint"
+      },
+      "span_period": {
+        "type": "boolean",
+        "required": false,
+        "description": "Span period",
+        "label": "Span period",
+        "default": false
+      }
+    }
+  },
+  "derive_var_relative_flag": {
+    "label": "Relative flag",
+    "description": "Derive flag relative to a condition within groups",
+    "group": "Flags",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "order": {
+        "type": "column-list",
+        "required": true,
+        "description": "Order",
+        "label": "Order"
+      },
+      "new_var": {
+        "type": "column",
+        "required": true,
+        "description": "New var",
+        "label": "New var"
+      },
+      "condition": {
+        "type": "expr",
+        "required": true,
+        "description": "Condition",
+        "label": "Condition"
+      },
+      "mode": {
+        "type": "enum",
+        "required": true,
+        "description": "Mode",
+        "label": "Mode",
+        "values": [
+          {
+            "value": "first",
+            "label": "First",
+            "description": "Select first record"
+          },
+          {
+            "value": "last",
+            "label": "Last",
+            "description": "Select last record"
+          }
+        ]
+      },
+      "selection": {
+        "type": "enum",
+        "required": true,
+        "description": "Selection",
+        "label": "Selection",
+        "values": [
+          {
+            "value": "any",
+            "label": "Any",
+            "description": "Any matching"
+          },
+          {
+            "value": "first",
+            "label": "First",
+            "description": "First matching"
+          },
+          {
+            "value": "last",
+            "label": "Last",
+            "description": "Last matching"
+          }
+        ]
+      },
+      "inclusive": {
+        "type": "boolean",
+        "required": true,
+        "description": "Inclusive",
+        "label": "Inclusive"
+      },
+      "flag_no_ref_groups": {
+        "type": "boolean",
+        "required": false,
+        "description": "Flag no ref groups",
+        "label": "Flag no ref groups",
+        "default": true
+      },
+      "check_type": {
+        "type": "enum",
+        "required": false,
+        "description": "Check type",
+        "label": "Check type",
+        "default": "warning",
+        "values": [
+          {
+            "value": "none",
+            "label": "None",
+            "description": "No checks"
+          },
+          {
+            "value": "message",
+            "label": "Message",
+            "description": "Show message"
+          },
+          {
+            "value": "warning",
+            "label": "Warning",
+            "description": "Show warning"
+          },
+          {
+            "value": "error",
+            "label": "Error",
+            "description": "Raise error"
+          }
+        ]
+      }
+    }
+  },
+  "derive_var_trtemfl": {
+    "label": "Treatment-emergent flag",
+    "description": "Derive treatment-emergent flag",
+    "group": "Flags",
+    "needs_dataset_add": false,
+    "args": {
+      "new_var": {
+        "type": "column",
+        "required": false,
+        "description": "New var",
+        "label": "New var"
+      },
+      "start_date": {
+        "type": "column",
+        "required": false,
+        "description": "Start date",
+        "label": "Start date"
+      },
+      "end_date": {
+        "type": "column",
+        "required": false,
+        "description": "End date",
+        "label": "End date"
+      },
+      "trt_start_date": {
+        "type": "column",
+        "required": false,
+        "description": "Trt start date",
+        "label": "Trt start date"
+      },
+      "trt_end_date": {
+        "type": "column",
+        "required": false,
+        "description": "Trt end date",
+        "label": "Trt end date"
+      },
+      "end_window": {
+        "type": "numeric",
+        "required": false,
+        "description": "End window",
+        "label": "End window"
+      },
+      "ignore_time_for_trt_end": {
+        "type": "boolean",
+        "required": false,
+        "description": "Ignore time for trt end",
+        "label": "Ignore time for trt end",
+        "default": true
+      },
+      "initial_intensity": {
+        "type": "column",
+        "required": false,
+        "description": "Initial intensity",
+        "label": "Initial intensity"
+      },
+      "intensity": {
+        "type": "column",
+        "required": false,
+        "description": "Intensity",
+        "label": "Intensity"
+      },
+      "group_var": {
+        "type": "column",
+        "required": false,
+        "description": "Group var",
+        "label": "Group var"
+      },
+      "subject_keys": {
+        "type": "column-list",
+        "required": false,
+        "description": "Subject keys",
+        "label": "Subject keys"
+      }
+    }
   },
   "derive_var_base": {
     "label": "Baseline value",
@@ -913,9 +1826,329 @@
         "arg_name": "filter",
         "label": "Baseline filter"
       }
-    },
-    "fn_name": "derive_var_base",
-    "icon": "<path d=\"M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5\"/>"
+    }
+  },
+  "derive_vars_computed": {
+    "label": "Computed variables",
+    "description": "Derive computed variables from multiple parameters",
+    "group": "Merge & Lookup",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "parameters": {
+        "type": "text",
+        "required": true,
+        "description": "Parameters",
+        "label": "Parameters"
+      },
+      "new_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "New vars",
+        "label": "New vars"
+      },
+      "filter_add": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter add",
+        "label": "Filter add"
+      },
+      "constant_by_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "Constant by vars",
+        "label": "Constant by vars"
+      },
+      "constant_parameters": {
+        "type": "text",
+        "required": false,
+        "description": "Constant parameters",
+        "label": "Constant parameters"
+      }
+    }
+  },
+  "derive_vars_joined_summary": {
+    "label": "Joined summary",
+    "description": "Derive summary variables from joined observations",
+    "group": "Merge & Lookup",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "order": {
+        "type": "column-list",
+        "required": false,
+        "description": "Order",
+        "label": "Order"
+      },
+      "new_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "New vars",
+        "label": "New vars"
+      },
+      "tmp_obs_nr_var": {
+        "type": "column",
+        "required": false,
+        "description": "Tmp obs nr var",
+        "label": "Tmp obs nr var"
+      },
+      "join_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "Join vars",
+        "label": "Join vars"
+      },
+      "join_type": {
+        "type": "enum",
+        "required": true,
+        "description": "Join type",
+        "label": "Join type",
+        "values": [
+          {
+            "value": "all",
+            "label": "All",
+            "description": "All observations"
+          },
+          {
+            "value": "after",
+            "label": "After",
+            "description": "After reference"
+          },
+          {
+            "value": "before",
+            "label": "Before",
+            "description": "Before reference"
+          }
+        ]
+      },
+      "filter_add": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter add",
+        "label": "Filter add"
+      },
+      "first_cond_lower": {
+        "type": "expr",
+        "required": false,
+        "description": "First cond lower",
+        "label": "First cond lower"
+      },
+      "first_cond_upper": {
+        "type": "expr",
+        "required": false,
+        "description": "First cond upper",
+        "label": "First cond upper"
+      },
+      "filter_join": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter join",
+        "label": "Filter join"
+      },
+      "missing_values": {
+        "type": "column-list",
+        "required": false,
+        "description": "Missing values",
+        "label": "Missing values"
+      },
+      "check_type": {
+        "type": "enum",
+        "required": false,
+        "description": "Check type",
+        "label": "Check type",
+        "default": "warning",
+        "values": [
+          {
+            "value": "none",
+            "label": "None",
+            "description": "No checks"
+          },
+          {
+            "value": "message",
+            "label": "Message",
+            "description": "Show message"
+          },
+          {
+            "value": "warning",
+            "label": "Warning",
+            "description": "Show warning"
+          },
+          {
+            "value": "error",
+            "label": "Error",
+            "description": "Raise error"
+          }
+        ]
+      }
+    }
+  },
+  "derive_vars_joined": {
+    "label": "Joined variables",
+    "description": "Derive variables by joining with conditions",
+    "group": "Merge & Lookup",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "order": {
+        "type": "column-list",
+        "required": false,
+        "description": "Order",
+        "label": "Order"
+      },
+      "new_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "New vars",
+        "label": "New vars"
+      },
+      "tmp_obs_nr_var": {
+        "type": "column",
+        "required": false,
+        "description": "Tmp obs nr var",
+        "label": "Tmp obs nr var"
+      },
+      "join_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "Join vars",
+        "label": "Join vars"
+      },
+      "join_type": {
+        "type": "enum",
+        "required": true,
+        "description": "Join type",
+        "label": "Join type",
+        "values": [
+          {
+            "value": "all",
+            "label": "All",
+            "description": "All observations"
+          },
+          {
+            "value": "after",
+            "label": "After",
+            "description": "After reference"
+          },
+          {
+            "value": "before",
+            "label": "Before",
+            "description": "Before reference"
+          }
+        ]
+      },
+      "filter_add": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter add",
+        "label": "Filter add"
+      },
+      "first_cond_lower": {
+        "type": "expr",
+        "required": false,
+        "description": "First cond lower",
+        "label": "First cond lower"
+      },
+      "first_cond_upper": {
+        "type": "expr",
+        "required": false,
+        "description": "First cond upper",
+        "label": "First cond upper"
+      },
+      "filter_join": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter join",
+        "label": "Filter join"
+      },
+      "mode": {
+        "type": "enum",
+        "required": false,
+        "description": "Mode",
+        "label": "Mode",
+        "values": [
+          {
+            "value": "first",
+            "label": "First",
+            "description": "Select first record"
+          },
+          {
+            "value": "last",
+            "label": "Last",
+            "description": "Select last record"
+          }
+        ]
+      },
+      "exist_flag": {
+        "type": "column",
+        "required": false,
+        "description": "Exist flag",
+        "label": "Exist flag"
+      },
+      "true_value": {
+        "type": "text",
+        "required": false,
+        "description": "True value",
+        "label": "True value",
+        "default": "Y"
+      },
+      "false_value": {
+        "type": "text",
+        "required": false,
+        "description": "False value",
+        "label": "False value",
+        "default": null
+      },
+      "missing_values": {
+        "type": "column-list",
+        "required": false,
+        "description": "Missing values",
+        "label": "Missing values"
+      },
+      "check_type": {
+        "type": "enum",
+        "required": false,
+        "description": "Check type",
+        "label": "Check type",
+        "default": "warning",
+        "values": [
+          {
+            "value": "none",
+            "label": "None",
+            "description": "No checks"
+          },
+          {
+            "value": "message",
+            "label": "Message",
+            "description": "Show message"
+          },
+          {
+            "value": "warning",
+            "label": "Warning",
+            "description": "Show warning"
+          },
+          {
+            "value": "error",
+            "label": "Error",
+            "description": "Raise error"
+          }
+        ]
+      }
+    }
   },
   "derive_vars_merged": {
     "label": "Merge variables",
@@ -1065,8 +2298,1428 @@
         "arg_name": "relationship",
         "label": "Expected relationship"
       }
-    },
-    "fn_name": "derive_vars_merged",
-    "icon": "<path fill-rule=\"evenodd\" d=\"M6 7.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5\"/><path d=\"M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z\"/>"
+    }
+  },
+  "derive_vars_merged_lookup": {
+    "label": "Merged lookup",
+    "description": "Merge with lookup table and flag unmapped values",
+    "group": "Merge & Lookup",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "order": {
+        "type": "column-list",
+        "required": false,
+        "description": "Order",
+        "label": "Order"
+      },
+      "new_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "New vars",
+        "label": "New vars"
+      },
+      "mode": {
+        "type": "enum",
+        "required": false,
+        "description": "Mode",
+        "label": "Mode",
+        "values": [
+          {
+            "value": "first",
+            "label": "First",
+            "description": "Select first record"
+          },
+          {
+            "value": "last",
+            "label": "Last",
+            "description": "Select last record"
+          }
+        ]
+      },
+      "filter_add": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter add",
+        "label": "Filter add"
+      },
+      "check_type": {
+        "type": "enum",
+        "required": false,
+        "description": "Check type",
+        "label": "Check type",
+        "default": "warning",
+        "values": [
+          {
+            "value": "none",
+            "label": "None",
+            "description": "No checks"
+          },
+          {
+            "value": "message",
+            "label": "Message",
+            "description": "Show message"
+          },
+          {
+            "value": "warning",
+            "label": "Warning",
+            "description": "Show warning"
+          },
+          {
+            "value": "error",
+            "label": "Error",
+            "description": "Raise error"
+          }
+        ]
+      },
+      "duplicate_msg": {
+        "type": "text",
+        "required": false,
+        "description": "Duplicate msg",
+        "label": "Duplicate msg"
+      },
+      "print_not_mapped": {
+        "type": "boolean",
+        "required": false,
+        "description": "Print not mapped",
+        "label": "Print not mapped",
+        "default": true
+      }
+    }
+  },
+  "derive_vars_merged_summary": {
+    "label": "Merged summary",
+    "description": "Derive summary variables from merged dataset",
+    "group": "Merge & Lookup",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "new_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "New vars",
+        "label": "New vars"
+      },
+      "filter_add": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter add",
+        "label": "Filter add"
+      },
+      "missing_values": {
+        "type": "column-list",
+        "required": false,
+        "description": "Missing values",
+        "label": "Missing values"
+      }
+    }
+  },
+  "derive_var_merged_summary": {
+    "label": "Merged summary variable",
+    "description": "Derive summary variable from merged dataset",
+    "group": "Merge & Lookup",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "new_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "New vars",
+        "label": "New vars"
+      },
+      "filter_add": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter add",
+        "label": "Filter add"
+      },
+      "missing_values": {
+        "type": "column-list",
+        "required": false,
+        "description": "Missing values",
+        "label": "Missing values"
+      }
+    }
+  },
+  "derive_vars_transposed": {
+    "label": "Transposed variables",
+    "description": "Derive variables by transposing another dataset",
+    "group": "Merge & Lookup",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "id_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "Id vars",
+        "label": "Id vars"
+      },
+      "key_var": {
+        "type": "column",
+        "required": true,
+        "description": "Key var",
+        "label": "Key var"
+      },
+      "value_var": {
+        "type": "column",
+        "required": true,
+        "description": "Value var",
+        "label": "Value var"
+      },
+      "filter": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter",
+        "label": "Filter"
+      },
+      "relationship": {
+        "type": "enum",
+        "required": false,
+        "description": "Relationship",
+        "label": "Relationship",
+        "values": [
+          {
+            "value": "one-to-one",
+            "label": "One-to-one",
+            "description": "One-to-one"
+          },
+          {
+            "value": "many-to-one",
+            "label": "Many-to-one",
+            "description": "Many-to-one"
+          }
+        ]
+      }
+    }
+  },
+  "derive_param_wbc_abs": {
+    "label": "Absolute WBC",
+    "description": "Derive absolute white blood cell count",
+    "group": "Parameters",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": true,
+        "description": "Set values to",
+        "label": "Set values to"
+      },
+      "get_unit_expr": {
+        "type": "expr",
+        "required": true,
+        "description": "Get unit expr",
+        "label": "Get unit expr"
+      },
+      "wbc_unit": {
+        "type": "text",
+        "required": false,
+        "description": "Wbc unit",
+        "label": "Wbc unit",
+        "default": "10^9/L"
+      },
+      "wbc_code": {
+        "type": "text",
+        "required": false,
+        "description": "Wbc code",
+        "label": "Wbc code",
+        "default": "WBC"
+      },
+      "diff_code": {
+        "type": "text",
+        "required": true,
+        "description": "Diff code",
+        "label": "Diff code"
+      },
+      "diff_type": {
+        "type": "enum",
+        "required": false,
+        "description": "Diff type",
+        "label": "Diff type",
+        "default": "fraction",
+        "values": [
+          {
+            "value": "fraction",
+            "label": "Fraction",
+            "description": "Fraction (0-1)"
+          },
+          {
+            "value": "percent",
+            "label": "Percent",
+            "description": "Percentage (0-100)"
+          }
+        ]
+      }
+    }
+  },
+  "derive_param_bmi": {
+    "label": "BMI",
+    "description": "Derive BMI from weight and height",
+    "group": "Parameters",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": false,
+        "description": "Set values to",
+        "label": "Set values to"
+      },
+      "weight_code": {
+        "type": "text",
+        "required": false,
+        "description": "Weight code",
+        "label": "Weight code",
+        "default": "WEIGHT"
+      },
+      "height_code": {
+        "type": "text",
+        "required": false,
+        "description": "Height code",
+        "label": "Height code",
+        "default": "HEIGHT"
+      },
+      "get_unit_expr": {
+        "type": "expr",
+        "required": true,
+        "description": "Get unit expr",
+        "label": "Get unit expr"
+      },
+      "filter": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter",
+        "label": "Filter"
+      },
+      "constant_by_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "Constant by vars",
+        "label": "Constant by vars"
+      }
+    }
+  },
+  "derive_param_bsa": {
+    "label": "BSA",
+    "description": "Derive body surface area from height and weight",
+    "group": "Parameters",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "method": {
+        "type": "enum",
+        "required": true,
+        "description": "Method",
+        "label": "Method",
+        "values": [
+          {
+            "value": "Mosteller",
+            "label": "Mosteller",
+            "description": "Mosteller formula"
+          },
+          {
+            "value": "DuBois-DuBois",
+            "label": "DuBois-DuBois",
+            "description": "DuBois-DuBois"
+          },
+          {
+            "value": "Haycock",
+            "label": "Haycock",
+            "description": "Haycock formula"
+          },
+          {
+            "value": "Gehan-George",
+            "label": "Gehan-George",
+            "description": "Gehan-George"
+          },
+          {
+            "value": "Boyd",
+            "label": "Boyd",
+            "description": "Boyd formula"
+          },
+          {
+            "value": "Fujimoto",
+            "label": "Fujimoto",
+            "description": "Fujimoto formula"
+          },
+          {
+            "value": "Takahira",
+            "label": "Takahira",
+            "description": "Takahira formula"
+          }
+        ]
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": false,
+        "description": "Set values to",
+        "label": "Set values to"
+      },
+      "height_code": {
+        "type": "text",
+        "required": false,
+        "description": "Height code",
+        "label": "Height code",
+        "default": "HEIGHT"
+      },
+      "weight_code": {
+        "type": "text",
+        "required": false,
+        "description": "Weight code",
+        "label": "Weight code",
+        "default": "WEIGHT"
+      },
+      "get_unit_expr": {
+        "type": "expr",
+        "required": true,
+        "description": "Get unit expr",
+        "label": "Get unit expr"
+      },
+      "filter": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter",
+        "label": "Filter"
+      },
+      "constant_by_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "Constant by vars",
+        "label": "Constant by vars"
+      }
+    }
+  },
+  "derive_param_computed": {
+    "label": "Computed parameter",
+    "description": "Derive new parameter from existing parameters",
+    "group": "Parameters",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "parameters": {
+        "type": "text",
+        "required": true,
+        "description": "Parameters",
+        "label": "Parameters"
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": true,
+        "description": "Set values to",
+        "label": "Set values to"
+      },
+      "filter": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter",
+        "label": "Filter"
+      },
+      "constant_by_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "Constant by vars",
+        "label": "Constant by vars"
+      },
+      "constant_parameters": {
+        "type": "text",
+        "required": false,
+        "description": "Constant parameters",
+        "label": "Constant parameters"
+      },
+      "keep_nas": {
+        "type": "boolean",
+        "required": false,
+        "description": "Keep nas",
+        "label": "Keep nas",
+        "default": false
+      }
+    }
+  },
+  "derive_param_qtc": {
+    "label": "Corrected QT",
+    "description": "Derive corrected QT interval from QT and RR",
+    "group": "Parameters",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "method": {
+        "type": "enum",
+        "required": true,
+        "description": "Method",
+        "label": "Method",
+        "values": [
+          {
+            "value": "Mosteller",
+            "label": "Mosteller",
+            "description": "Mosteller formula"
+          },
+          {
+            "value": "DuBois-DuBois",
+            "label": "DuBois-DuBois",
+            "description": "DuBois-DuBois"
+          },
+          {
+            "value": "Haycock",
+            "label": "Haycock",
+            "description": "Haycock formula"
+          },
+          {
+            "value": "Gehan-George",
+            "label": "Gehan-George",
+            "description": "Gehan-George"
+          },
+          {
+            "value": "Boyd",
+            "label": "Boyd",
+            "description": "Boyd formula"
+          },
+          {
+            "value": "Fujimoto",
+            "label": "Fujimoto",
+            "description": "Fujimoto formula"
+          },
+          {
+            "value": "Takahira",
+            "label": "Takahira",
+            "description": "Takahira formula"
+          }
+        ]
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": false,
+        "description": "Set values to",
+        "label": "Set values to"
+      },
+      "qt_code": {
+        "type": "text",
+        "required": false,
+        "description": "Qt code",
+        "label": "Qt code",
+        "default": "QT"
+      },
+      "rr_code": {
+        "type": "text",
+        "required": false,
+        "description": "Rr code",
+        "label": "Rr code",
+        "default": "RR"
+      },
+      "get_unit_expr": {
+        "type": "expr",
+        "required": true,
+        "description": "Get unit expr",
+        "label": "Get unit expr"
+      },
+      "filter": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter",
+        "label": "Filter"
+      }
+    }
+  },
+  "derive_param_doseint": {
+    "label": "Dose intensity",
+    "description": "Derive dose intensity parameter",
+    "group": "Parameters",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": false,
+        "description": "Set values to",
+        "label": "Set values to"
+      },
+      "tadm_code": {
+        "type": "text",
+        "required": false,
+        "description": "Tadm code",
+        "label": "Tadm code",
+        "default": "TNDOSE"
+      },
+      "tpadm_code": {
+        "type": "text",
+        "required": false,
+        "description": "Tpadm code",
+        "label": "Tpadm code",
+        "default": "TSNDOSE"
+      },
+      "zero_doses": {
+        "type": "enum",
+        "required": false,
+        "description": "Zero doses",
+        "label": "Zero doses",
+        "default": "Inf",
+        "values": [
+          {
+            "value": "omit",
+            "label": "Omit",
+            "description": "Omit zero-dose records"
+          },
+          {
+            "value": "keep",
+            "label": "Keep",
+            "description": "Keep zero-dose records"
+          }
+        ]
+      },
+      "filter": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter",
+        "label": "Filter"
+      }
+    }
+  },
+  "derive_param_exist_flag": {
+    "label": "Existence flag parameter",
+    "description": "Derive flag parameter based on record existence",
+    "group": "Parameters",
+    "needs_dataset_add": true,
+    "args": {
+      "condition": {
+        "type": "expr",
+        "required": true,
+        "description": "Condition",
+        "label": "Condition"
+      },
+      "true_value": {
+        "type": "text",
+        "required": false,
+        "description": "True value",
+        "label": "True value",
+        "default": "Y"
+      },
+      "false_value": {
+        "type": "text",
+        "required": false,
+        "description": "False value",
+        "label": "False value",
+        "default": null
+      },
+      "missing_value": {
+        "type": "text",
+        "required": false,
+        "description": "Missing value",
+        "label": "Missing value",
+        "default": null
+      },
+      "filter_add": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter add",
+        "label": "Filter add"
+      },
+      "by_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": true,
+        "description": "Set values to",
+        "label": "Set values to"
+      }
+    }
+  },
+  "derive_param_exposure": {
+    "label": "Exposure",
+    "description": "Derive exposure parameter from dosing data",
+    "group": "Parameters",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "input_code": {
+        "type": "text",
+        "required": true,
+        "description": "Input code",
+        "label": "Input code"
+      },
+      "filter_add": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter add",
+        "label": "Filter add"
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": false,
+        "description": "Set values to",
+        "label": "Set values to"
+      }
+    }
+  },
+  "derive_param_extreme_record": {
+    "label": "Extreme record parameter",
+    "description": "Derive parameter from extreme record across sources",
+    "group": "Parameters",
+    "needs_dataset_add": false,
+    "args": {
+      "sources": {
+        "type": "text",
+        "required": true,
+        "description": "Sources",
+        "label": "Sources"
+      },
+      "by_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "order": {
+        "type": "column-list",
+        "required": true,
+        "description": "Order",
+        "label": "Order"
+      },
+      "mode": {
+        "type": "enum",
+        "required": true,
+        "description": "Mode",
+        "label": "Mode",
+        "values": [
+          {
+            "value": "first",
+            "label": "First",
+            "description": "Select first record"
+          },
+          {
+            "value": "last",
+            "label": "Last",
+            "description": "Select last record"
+          }
+        ]
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": true,
+        "description": "Set values to",
+        "label": "Set values to"
+      }
+    }
+  },
+  "derive_param_framingham": {
+    "label": "Framingham score",
+    "description": "Derive Framingham cardiovascular risk score",
+    "group": "Parameters",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": false,
+        "description": "Set values to",
+        "label": "Set values to"
+      },
+      "sysbp_code": {
+        "type": "text",
+        "required": false,
+        "description": "Sysbp code",
+        "label": "Sysbp code",
+        "default": "SYSBP"
+      },
+      "chol_code": {
+        "type": "text",
+        "required": false,
+        "description": "Chol code",
+        "label": "Chol code",
+        "default": "CHOL"
+      },
+      "cholhdl_code": {
+        "type": "text",
+        "required": false,
+        "description": "Cholhdl code",
+        "label": "Cholhdl code",
+        "default": "CHOLHDL"
+      },
+      "age": {
+        "type": "text",
+        "required": false,
+        "description": "Age",
+        "label": "Age"
+      },
+      "sex": {
+        "type": "text",
+        "required": false,
+        "description": "Sex",
+        "label": "Sex"
+      },
+      "smokefl": {
+        "type": "text",
+        "required": false,
+        "description": "Smokefl",
+        "label": "Smokefl"
+      },
+      "diabetfl": {
+        "type": "text",
+        "required": false,
+        "description": "Diabetfl",
+        "label": "Diabetfl"
+      },
+      "trthypfl": {
+        "type": "text",
+        "required": false,
+        "description": "Trthypfl",
+        "label": "Trthypfl"
+      },
+      "get_unit_expr": {
+        "type": "expr",
+        "required": true,
+        "description": "Get unit expr",
+        "label": "Get unit expr"
+      },
+      "filter": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter",
+        "label": "Filter"
+      }
+    }
+  },
+  "derive_param_map": {
+    "label": "Mean arterial pressure",
+    "description": "Derive MAP from systolic/diastolic BP",
+    "group": "Parameters",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": false,
+        "description": "Set values to",
+        "label": "Set values to"
+      },
+      "sysbp_code": {
+        "type": "text",
+        "required": false,
+        "description": "Sysbp code",
+        "label": "Sysbp code",
+        "default": "SYSBP"
+      },
+      "diabp_code": {
+        "type": "text",
+        "required": false,
+        "description": "Diabp code",
+        "label": "Diabp code",
+        "default": "DIABP"
+      },
+      "hr_code": {
+        "type": "text",
+        "required": false,
+        "description": "Hr code",
+        "label": "Hr code"
+      },
+      "get_unit_expr": {
+        "type": "expr",
+        "required": true,
+        "description": "Get unit expr",
+        "label": "Get unit expr"
+      },
+      "filter": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter",
+        "label": "Filter"
+      }
+    }
+  },
+  "derive_param_rr": {
+    "label": "RR interval",
+    "description": "Derive RR interval from heart rate",
+    "group": "Parameters",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": false,
+        "description": "Set values to",
+        "label": "Set values to"
+      },
+      "hr_code": {
+        "type": "text",
+        "required": false,
+        "description": "Hr code",
+        "label": "Hr code",
+        "default": "HR"
+      },
+      "get_unit_expr": {
+        "type": "expr",
+        "required": true,
+        "description": "Get unit expr",
+        "label": "Get unit expr"
+      },
+      "filter": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter",
+        "label": "Filter"
+      }
+    }
+  },
+  "derive_param_tte": {
+    "label": "Time-to-event",
+    "description": "Derive time-to-event parameter",
+    "group": "Parameters",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "start_date": {
+        "type": "column",
+        "required": false,
+        "description": "Start date",
+        "label": "Start date"
+      },
+      "event_conditions": {
+        "type": "text",
+        "required": true,
+        "description": "Event conditions",
+        "label": "Event conditions"
+      },
+      "censor_conditions": {
+        "type": "text",
+        "required": true,
+        "description": "Censor conditions",
+        "label": "Censor conditions"
+      },
+      "create_datetime": {
+        "type": "boolean",
+        "required": false,
+        "description": "Create datetime",
+        "label": "Create datetime",
+        "default": false
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": true,
+        "description": "Set values to",
+        "label": "Set values to"
+      },
+      "subject_keys": {
+        "type": "column-list",
+        "required": false,
+        "description": "Subject keys",
+        "label": "Subject keys"
+      },
+      "check_type": {
+        "type": "enum",
+        "required": false,
+        "description": "Check type",
+        "label": "Check type",
+        "default": "warning",
+        "values": [
+          {
+            "value": "none",
+            "label": "None",
+            "description": "No checks"
+          },
+          {
+            "value": "message",
+            "label": "Message",
+            "description": "Show message"
+          },
+          {
+            "value": "warning",
+            "label": "Warning",
+            "description": "Show warning"
+          },
+          {
+            "value": "error",
+            "label": "Error",
+            "description": "Raise error"
+          }
+        ]
+      }
+    }
+  },
+  "derive_basetype_records": {
+    "label": "Basetype records",
+    "description": "Add basetype records for analysis populations",
+    "group": "Records",
+    "needs_dataset_add": false,
+    "args": {
+      "basetypes": {
+        "type": "text",
+        "required": true,
+        "description": "Basetypes",
+        "label": "Basetypes"
+      }
+    }
+  },
+  "derive_expected_records": {
+    "label": "Expected records",
+    "description": "Add expected records from reference dataset",
+    "group": "Records",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": false,
+        "description": "Set values to",
+        "label": "Set values to"
+      }
+    }
+  },
+  "derive_extreme_event": {
+    "label": "Extreme event",
+    "description": "Derive parameter from extreme event across sources",
+    "group": "Records",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "events": {
+        "type": "text",
+        "required": true,
+        "description": "Events",
+        "label": "Events"
+      },
+      "tmp_event_nr_var": {
+        "type": "column",
+        "required": false,
+        "description": "Tmp event nr var",
+        "label": "Tmp event nr var"
+      },
+      "order": {
+        "type": "column-list",
+        "required": true,
+        "description": "Order",
+        "label": "Order"
+      },
+      "mode": {
+        "type": "enum",
+        "required": true,
+        "description": "Mode",
+        "label": "Mode",
+        "values": [
+          {
+            "value": "first",
+            "label": "First",
+            "description": "Select first record"
+          },
+          {
+            "value": "last",
+            "label": "Last",
+            "description": "Select last record"
+          }
+        ]
+      },
+      "check_type": {
+        "type": "enum",
+        "required": false,
+        "description": "Check type",
+        "label": "Check type",
+        "default": "warning",
+        "values": [
+          {
+            "value": "none",
+            "label": "None",
+            "description": "No checks"
+          },
+          {
+            "value": "message",
+            "label": "Message",
+            "description": "Show message"
+          },
+          {
+            "value": "warning",
+            "label": "Warning",
+            "description": "Show warning"
+          },
+          {
+            "value": "error",
+            "label": "Error",
+            "description": "Raise error"
+          }
+        ]
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": false,
+        "description": "Set values to",
+        "label": "Set values to"
+      },
+      "keep_source_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "Keep source vars",
+        "label": "Keep source vars"
+      }
+    }
+  },
+  "derive_vars_extreme_event": {
+    "label": "Extreme event variables",
+    "description": "Derive variables from extreme event across sources",
+    "group": "Records",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "events": {
+        "type": "text",
+        "required": true,
+        "description": "Events",
+        "label": "Events"
+      },
+      "tmp_event_nr_var": {
+        "type": "column",
+        "required": false,
+        "description": "Tmp event nr var",
+        "label": "Tmp event nr var"
+      },
+      "order": {
+        "type": "column-list",
+        "required": true,
+        "description": "Order",
+        "label": "Order"
+      },
+      "mode": {
+        "type": "enum",
+        "required": true,
+        "description": "Mode",
+        "label": "Mode",
+        "values": [
+          {
+            "value": "first",
+            "label": "First",
+            "description": "Select first record"
+          },
+          {
+            "value": "last",
+            "label": "Last",
+            "description": "Select last record"
+          }
+        ]
+      },
+      "check_type": {
+        "type": "enum",
+        "required": false,
+        "description": "Check type",
+        "label": "Check type",
+        "default": "warning",
+        "values": [
+          {
+            "value": "none",
+            "label": "None",
+            "description": "No checks"
+          },
+          {
+            "value": "message",
+            "label": "Message",
+            "description": "Show message"
+          },
+          {
+            "value": "warning",
+            "label": "Warning",
+            "description": "Show warning"
+          },
+          {
+            "value": "error",
+            "label": "Error",
+            "description": "Raise error"
+          }
+        ]
+      },
+      "new_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "New vars",
+        "label": "New vars"
+      }
+    }
+  },
+  "derive_extreme_records": {
+    "label": "Extreme records",
+    "description": "Add extreme (first/last) records per group",
+    "group": "Records",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "order": {
+        "type": "column-list",
+        "required": false,
+        "description": "Order",
+        "label": "Order"
+      },
+      "mode": {
+        "type": "enum",
+        "required": false,
+        "description": "Mode",
+        "label": "Mode",
+        "values": [
+          {
+            "value": "first",
+            "label": "First",
+            "description": "Select first record"
+          },
+          {
+            "value": "last",
+            "label": "Last",
+            "description": "Select last record"
+          }
+        ]
+      },
+      "filter_add": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter add",
+        "label": "Filter add"
+      },
+      "check_type": {
+        "type": "enum",
+        "required": false,
+        "description": "Check type",
+        "label": "Check type",
+        "default": "warning",
+        "values": [
+          {
+            "value": "none",
+            "label": "None",
+            "description": "No checks"
+          },
+          {
+            "value": "message",
+            "label": "Message",
+            "description": "Show message"
+          },
+          {
+            "value": "warning",
+            "label": "Warning",
+            "description": "Show warning"
+          },
+          {
+            "value": "error",
+            "label": "Error",
+            "description": "Raise error"
+          }
+        ]
+      },
+      "exist_flag": {
+        "type": "column",
+        "required": false,
+        "description": "Exist flag",
+        "label": "Exist flag"
+      },
+      "true_value": {
+        "type": "text",
+        "required": false,
+        "description": "True value",
+        "label": "True value",
+        "default": "Y"
+      },
+      "false_value": {
+        "type": "text",
+        "required": false,
+        "description": "False value",
+        "label": "False value",
+        "default": null
+      },
+      "keep_source_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "Keep source vars",
+        "label": "Keep source vars"
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": true,
+        "description": "Set values to",
+        "label": "Set values to"
+      }
+    }
+  },
+  "derive_locf_records": {
+    "label": "LOCF records",
+    "description": "Add LOCF (last observation carried forward) records",
+    "group": "Records",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "id_vars_ref": {
+        "type": "column-list",
+        "required": false,
+        "description": "Id vars ref",
+        "label": "Id vars ref"
+      },
+      "analysis_var": {
+        "type": "column",
+        "required": false,
+        "description": "Analysis var",
+        "label": "Analysis var"
+      },
+      "imputation": {
+        "type": "enum",
+        "required": false,
+        "description": "Imputation",
+        "label": "Imputation",
+        "default": "add",
+        "values": [
+          {
+            "value": "none",
+            "label": "None",
+            "description": "No imputation"
+          },
+          {
+            "value": "LOCF",
+            "label": "LOCF",
+            "description": "Last observation carried forward"
+          }
+        ]
+      },
+      "order": {
+        "type": "column-list",
+        "required": true,
+        "description": "Order",
+        "label": "Order"
+      },
+      "keep_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "Keep vars",
+        "label": "Keep vars"
+      }
+    }
+  },
+  "derive_summary_records": {
+    "label": "Summary records",
+    "description": "Add summary records (mean, max, etc.) per group",
+    "group": "Records",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "By vars",
+        "label": "By vars"
+      },
+      "filter_add": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter add",
+        "label": "Filter add"
+      },
+      "constant_values": {
+        "type": "column-list",
+        "required": false,
+        "description": "Constant values",
+        "label": "Constant values"
+      },
+      "set_values_to": {
+        "type": "expr",
+        "required": true,
+        "description": "Set values to",
+        "label": "Set values to"
+      },
+      "missing_values": {
+        "type": "column-list",
+        "required": false,
+        "description": "Missing values",
+        "label": "Missing values"
+      }
+    }
   }
 }
