@@ -1,0 +1,149 @@
+/* =========================================================================
+   AdmiralBlock — universal admiral derive block
+   ========================================================================= */
+
+.admiral-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* --- Top row: function selector + gear --- */
+.admiral-top-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.admiral-fn-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Make function selector bordered */
+.admiral-fn-wrap .blockr-srich {
+  background-color: var(--blockr-color-bg-input, #f9fafb);
+  border: 1px solid var(--blockr-color-border, #e5e7eb);
+  border-radius: 8px;
+  min-height: 42px;
+}
+
+.admiral-fn-wrap .blockr-srich__control {
+  padding: 8px 12px;
+}
+
+/* --- Argument form rows --- */
+.admiral-required-args {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admiral-arg-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  padding: 4px 0;
+}
+
+.admiral-arg-label {
+  width: 170px;
+  flex-shrink: 0;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.admiral-arg-label-human {
+  font-size: 0.8125rem;
+  color: var(--blockr-color-text-primary, #111827);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admiral-arg-label-code {
+  font-size: 0.6875rem;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+  color: var(--blockr-grey-400, #9ca3af);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admiral-arg-input {
+  flex: 1;
+  min-width: 0;
+}
+
+/* --- Text and expression inputs --- */
+.admiral-text-input,
+.admiral-expr-input {
+  width: 100%;
+  height: 34px;
+  padding: 6px 10px;
+  font-size: var(--blockr-font-size-base, 0.875rem);
+  background-color: var(--blockr-color-bg-input, #f9fafb);
+  border: 1px solid var(--blockr-color-border, #e5e7eb);
+  border-radius: 8px;
+  color: var(--blockr-color-text-primary, #111827);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.admiral-expr-input {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+}
+
+.admiral-text-input:focus,
+.admiral-expr-input:focus {
+  border-color: var(--blockr-color-primary, #2563eb);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.admiral-text-input::placeholder,
+.admiral-expr-input::placeholder {
+  color: var(--blockr-grey-400, #9ca3af);
+}
+
+/* --- Checkbox --- */
+.admiral-checkbox-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 0.8125rem;
+}
+
+.admiral-checkbox-text {
+  color: var(--blockr-grey-500, #6b7280);
+}
+
+/* --- Popover positioning --- */
+.admiral-popover {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  min-width: 320px;
+}
+
+.admiral-popover .admiral-arg-row {
+  padding: 2px 0;
+}
+
+/* SelectRich dropdowns inside popover must open left-aligned to popover, not overflow right */
+.admiral-popover .blockr-srich__dropdown {
+  right: 0;
+  left: auto;
+  min-width: 250px;
+}
+
+/* Regular Select dropdowns inside popover too */
+.admiral-popover .blockr-select__dropdown {
+  right: 0;
+  left: auto;
+}

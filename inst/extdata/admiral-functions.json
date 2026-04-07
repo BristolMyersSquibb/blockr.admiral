@@ -1,0 +1,1056 @@
+{
+  "derive_var_chg": {
+    "label": "Change from baseline",
+    "description": "Compute CHG = AVAL - BASE",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {},
+    "fn_name": "derive_var_chg"
+  },
+  "derive_var_pchg": {
+    "label": "Percent change",
+    "description": "Compute PCHG = (AVAL - BASE) / BASE * 100",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {},
+    "fn_name": "derive_var_pchg"
+  },
+  "derive_var_trtdurd": {
+    "label": "Treatment duration",
+    "description": "Compute treatment duration in days",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {
+      "start_date": {
+        "type": "column",
+        "required": false,
+        "description": "Treatment start date variable (default: TRTSDT)",
+        "default": null,
+        "arg_name": "start_date",
+        "label": "Treatment start"
+      },
+      "end_date": {
+        "type": "column",
+        "required": false,
+        "description": "Treatment end date variable (default: TRTEDT)",
+        "default": null,
+        "arg_name": "end_date",
+        "label": "Treatment end"
+      }
+    },
+    "fn_name": "derive_var_trtdurd"
+  },
+  "derive_var_age_years": {
+    "label": "Age in years",
+    "description": "Convert age to years from other units",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {
+      "age_var": {
+        "type": "column",
+        "required": true,
+        "description": "Column containing age values",
+        "default": null,
+        "arg_name": "age_var",
+        "label": "Age column"
+      },
+      "age_unit": {
+        "type": "column",
+        "required": false,
+        "description": "Column containing age units (e.g., YEARS)",
+        "default": null,
+        "arg_name": "age_unit",
+        "label": "Unit column"
+      },
+      "new_var": {
+        "type": "column",
+        "required": true,
+        "description": "Name for age-in-years variable",
+        "default": null,
+        "arg_name": "new_var",
+        "label": "Output variable"
+      }
+    },
+    "fn_name": "derive_var_age_years"
+  },
+  "derive_var_analysis_ratio": {
+    "label": "Analysis ratio",
+    "description": "Compute ratio of two variables",
+    "group": "Simple Derivations",
+    "needs_dataset_add": false,
+    "args": {
+      "numer_var": {
+        "type": "column",
+        "required": true,
+        "description": "Numerator variable (e.g., AVAL)",
+        "default": null,
+        "arg_name": "numer_var",
+        "label": "Numerator"
+      },
+      "denom_var": {
+        "type": "column",
+        "required": true,
+        "description": "Denominator variable (e.g., BASE)",
+        "default": null,
+        "arg_name": "denom_var",
+        "label": "Denominator"
+      },
+      "new_var": {
+        "type": "column",
+        "required": false,
+        "description": "Name for the ratio variable",
+        "default": null,
+        "arg_name": "new_var",
+        "label": "Ratio variable"
+      }
+    },
+    "fn_name": "derive_var_analysis_ratio"
+  },
+  "derive_vars_dt": {
+    "label": "Parse date",
+    "description": "Parse character date (DTC) into date variable",
+    "group": "Dates & Times",
+    "needs_dataset_add": false,
+    "args": {
+      "new_vars_prefix": {
+        "type": "text",
+        "required": true,
+        "description": "Prefix for new variables (e.g., AST → ASTDT)",
+        "default": null,
+        "arg_name": "new_vars_prefix",
+        "label": "Prefix"
+      },
+      "dtc": {
+        "type": "column",
+        "required": true,
+        "description": "Character date column to parse",
+        "default": null,
+        "arg_name": "dtc",
+        "label": "Date column"
+      },
+      "highest_imputation": {
+        "type": "enum",
+        "required": false,
+        "description": "Highest component to impute",
+        "default": "h",
+        "values": [
+          {
+            "value": "Y",
+            "label": "Year",
+            "description": "Impute up to year"
+          },
+          {
+            "value": "M",
+            "label": "Month",
+            "description": "Impute up to month"
+          },
+          {
+            "value": "D",
+            "label": "Day",
+            "description": "Impute up to day"
+          },
+          {
+            "value": "h",
+            "label": "Hour",
+            "description": "Impute up to hour"
+          },
+          {
+            "value": "m",
+            "label": "Minute",
+            "description": "Impute up to minute"
+          },
+          {
+            "value": "s",
+            "label": "Second",
+            "description": "Impute up to second"
+          },
+          {
+            "value": "n",
+            "label": "None",
+            "description": "No imputation"
+          }
+        ],
+        "arg_name": "highest_imputation",
+        "label": "Highest imputation"
+      },
+      "date_imputation": {
+        "type": "enum",
+        "required": false,
+        "description": "Rule for imputing incomplete dates",
+        "default": "first",
+        "values": [
+          {
+            "value": "first",
+            "label": "First day of period",
+            "description": "Impute to first day of the period"
+          },
+          {
+            "value": "mid",
+            "label": "Mid-point of period",
+            "description": "Impute to mid-point of the period"
+          },
+          {
+            "value": "last",
+            "label": "Last day of period",
+            "description": "Impute to last day of the period"
+          }
+        ],
+        "arg_name": "date_imputation",
+        "label": "Date imputation"
+      },
+      "flag_imputation": {
+        "type": "enum",
+        "required": false,
+        "description": "Controls imputation flagging",
+        "default": "auto",
+        "values": [
+          {
+            "value": "auto",
+            "label": "Automatic",
+            "description": "Automatically determine flagging"
+          },
+          {
+            "value": "both",
+            "label": "Flag both date and time",
+            "description": "Flag both date and time imputation"
+          },
+          {
+            "value": "date",
+            "label": "Flag date only",
+            "description": "Flag date imputation only"
+          },
+          {
+            "value": "time",
+            "label": "Flag time only",
+            "description": "Flag time imputation only"
+          },
+          {
+            "value": "none",
+            "label": "No flag",
+            "description": "No imputation flag"
+          }
+        ],
+        "arg_name": "flag_imputation",
+        "label": "Flag imputation"
+      },
+      "min_dates": {
+        "type": "expr",
+        "required": false,
+        "description": "Minimum dates for imputation",
+        "default": null,
+        "arg_name": "min_dates",
+        "label": "Minimum dates"
+      },
+      "max_dates": {
+        "type": "expr",
+        "required": false,
+        "description": "Maximum dates for imputation",
+        "default": null,
+        "arg_name": "max_dates",
+        "label": "Maximum dates"
+      },
+      "preserve": {
+        "type": "boolean",
+        "required": false,
+        "description": "Preserve original DTC variable",
+        "default": false,
+        "arg_name": "preserve",
+        "label": "Preserve original"
+      }
+    },
+    "fn_name": "derive_vars_dt"
+  },
+  "derive_vars_dtm": {
+    "label": "Parse datetime",
+    "description": "Parse character datetime (DTC) into datetime variables",
+    "group": "Dates & Times",
+    "needs_dataset_add": false,
+    "args": {
+      "new_vars_prefix": {
+        "type": "text",
+        "required": true,
+        "description": "Prefix for new variables (e.g., AST → ASTDTM)",
+        "default": null,
+        "arg_name": "new_vars_prefix",
+        "label": "Prefix"
+      },
+      "dtc": {
+        "type": "column",
+        "required": true,
+        "description": "Character datetime column to parse",
+        "default": null,
+        "arg_name": "dtc",
+        "label": "Datetime column"
+      },
+      "highest_imputation": {
+        "type": "enum",
+        "required": false,
+        "description": "Highest component to impute",
+        "default": "h",
+        "values": [
+          {
+            "value": "Y",
+            "label": "Year",
+            "description": "Impute up to year"
+          },
+          {
+            "value": "M",
+            "label": "Month",
+            "description": "Impute up to month"
+          },
+          {
+            "value": "D",
+            "label": "Day",
+            "description": "Impute up to day"
+          },
+          {
+            "value": "h",
+            "label": "Hour",
+            "description": "Impute up to hour"
+          },
+          {
+            "value": "m",
+            "label": "Minute",
+            "description": "Impute up to minute"
+          },
+          {
+            "value": "s",
+            "label": "Second",
+            "description": "Impute up to second"
+          },
+          {
+            "value": "n",
+            "label": "None",
+            "description": "No imputation"
+          }
+        ],
+        "arg_name": "highest_imputation",
+        "label": "Highest imputation"
+      },
+      "date_imputation": {
+        "type": "enum",
+        "required": false,
+        "description": "Rule for imputing incomplete dates",
+        "default": "first",
+        "values": [
+          {
+            "value": "first",
+            "label": "First day of period",
+            "description": "Impute to first day of the period"
+          },
+          {
+            "value": "mid",
+            "label": "Mid-point of period",
+            "description": "Impute to mid-point of the period"
+          },
+          {
+            "value": "last",
+            "label": "Last day of period",
+            "description": "Impute to last day of the period"
+          }
+        ],
+        "arg_name": "date_imputation",
+        "label": "Date imputation"
+      },
+      "time_imputation": {
+        "type": "enum",
+        "required": false,
+        "description": "Rule for imputing incomplete times",
+        "default": "first",
+        "values": [
+          {
+            "value": "first",
+            "label": "00:00:00",
+            "description": "Impute to start of day"
+          },
+          {
+            "value": "last",
+            "label": "23:59:59",
+            "description": "Impute to end of day"
+          }
+        ],
+        "arg_name": "time_imputation",
+        "label": "Time imputation"
+      },
+      "flag_imputation": {
+        "type": "enum",
+        "required": false,
+        "description": "Controls imputation flagging",
+        "default": "auto",
+        "values": [
+          {
+            "value": "auto",
+            "label": "Automatic",
+            "description": "Automatically determine flagging"
+          },
+          {
+            "value": "both",
+            "label": "Flag both date and time",
+            "description": "Flag both date and time imputation"
+          },
+          {
+            "value": "date",
+            "label": "Flag date only",
+            "description": "Flag date imputation only"
+          },
+          {
+            "value": "time",
+            "label": "Flag time only",
+            "description": "Flag time imputation only"
+          },
+          {
+            "value": "none",
+            "label": "No flag",
+            "description": "No imputation flag"
+          }
+        ],
+        "arg_name": "flag_imputation",
+        "label": "Flag imputation"
+      },
+      "min_dates": {
+        "type": "expr",
+        "required": false,
+        "description": "Minimum dates for imputation",
+        "default": null,
+        "arg_name": "min_dates",
+        "label": "Minimum dates"
+      },
+      "max_dates": {
+        "type": "expr",
+        "required": false,
+        "description": "Maximum dates for imputation",
+        "default": null,
+        "arg_name": "max_dates",
+        "label": "Maximum dates"
+      },
+      "preserve": {
+        "type": "boolean",
+        "required": false,
+        "description": "Preserve original DTC variable",
+        "default": false,
+        "arg_name": "preserve",
+        "label": "Preserve original"
+      },
+      "ignore_seconds_flag": {
+        "type": "boolean",
+        "required": false,
+        "description": "Ignore seconds in imputation flag",
+        "default": true,
+        "arg_name": "ignore_seconds_flag",
+        "label": "Ignore seconds flag"
+      }
+    },
+    "fn_name": "derive_vars_dtm"
+  },
+  "derive_vars_dtm_to_dt": {
+    "label": "Datetime to date",
+    "description": "Extract date from datetime variables",
+    "group": "Dates & Times",
+    "needs_dataset_add": false,
+    "args": {
+      "source_vars": {
+        "type": "expr",
+        "required": true,
+        "description": "Datetime variables to convert (e.g., ADTM, ASTDTM)",
+        "default": null,
+        "arg_name": "source_vars",
+        "label": "Source variables"
+      }
+    },
+    "fn_name": "derive_vars_dtm_to_dt"
+  },
+  "derive_vars_dtm_to_tm": {
+    "label": "Datetime to time",
+    "description": "Extract time from datetime variables",
+    "group": "Dates & Times",
+    "needs_dataset_add": false,
+    "args": {
+      "source_vars": {
+        "type": "expr",
+        "required": true,
+        "description": "Datetime variables to convert",
+        "default": null,
+        "arg_name": "source_vars",
+        "label": "Source variables"
+      }
+    },
+    "fn_name": "derive_vars_dtm_to_tm"
+  },
+  "derive_vars_dy": {
+    "label": "Study day",
+    "description": "Compute study day relative to reference date",
+    "group": "Dates & Times",
+    "needs_dataset_add": false,
+    "args": {
+      "reference_date": {
+        "type": "column",
+        "required": true,
+        "description": "Date from which study days are counted",
+        "default": null,
+        "arg_name": "reference_date",
+        "label": "Reference date"
+      },
+      "source_vars": {
+        "type": "expr",
+        "required": true,
+        "description": "Date columns to compute study days for",
+        "default": null,
+        "arg_name": "source_vars",
+        "label": "Date variables"
+      }
+    },
+    "fn_name": "derive_vars_dy"
+  },
+  "derive_vars_duration": {
+    "label": "Duration",
+    "description": "Compute duration between two dates with unit conversion",
+    "group": "Duration",
+    "needs_dataset_add": false,
+    "args": {
+      "new_var": {
+        "type": "column",
+        "required": true,
+        "description": "Name for the new duration variable",
+        "default": null,
+        "arg_name": "new_var",
+        "label": "Duration variable"
+      },
+      "start_date": {
+        "type": "column",
+        "required": true,
+        "description": "Start date variable",
+        "default": null,
+        "arg_name": "start_date",
+        "label": "Start date"
+      },
+      "end_date": {
+        "type": "column",
+        "required": true,
+        "description": "End date variable",
+        "default": null,
+        "arg_name": "end_date",
+        "label": "End date"
+      },
+      "new_var_unit": {
+        "type": "column",
+        "required": false,
+        "description": "Variable to store the output unit label",
+        "default": null,
+        "arg_name": "new_var_unit",
+        "label": "Unit variable"
+      },
+      "in_unit": {
+        "type": "enum",
+        "required": false,
+        "description": "Unit of input dates",
+        "default": "days",
+        "values": [
+          {
+            "value": "years",
+            "label": "Years",
+            "description": "Input in years"
+          },
+          {
+            "value": "months",
+            "label": "Months",
+            "description": "Input in months"
+          },
+          {
+            "value": "days",
+            "label": "Days",
+            "description": "Input in days"
+          },
+          {
+            "value": "hours",
+            "label": "Hours",
+            "description": "Input in hours"
+          },
+          {
+            "value": "minutes",
+            "label": "Minutes",
+            "description": "Input in minutes"
+          },
+          {
+            "value": "seconds",
+            "label": "Seconds",
+            "description": "Input in seconds"
+          }
+        ],
+        "arg_name": "in_unit",
+        "label": "Input unit"
+      },
+      "out_unit": {
+        "type": "enum",
+        "required": false,
+        "description": "Unit for output duration",
+        "default": "DAYS",
+        "values": [
+          {
+            "value": "YEARS",
+            "label": "Years",
+            "description": "Output in years"
+          },
+          {
+            "value": "MONTHS",
+            "label": "Months",
+            "description": "Output in months"
+          },
+          {
+            "value": "DAYS",
+            "label": "Days",
+            "description": "Output in days"
+          },
+          {
+            "value": "HOURS",
+            "label": "Hours",
+            "description": "Output in hours"
+          },
+          {
+            "value": "MINUTES",
+            "label": "Minutes",
+            "description": "Output in minutes"
+          },
+          {
+            "value": "SECONDS",
+            "label": "Seconds",
+            "description": "Output in seconds"
+          }
+        ],
+        "arg_name": "out_unit",
+        "label": "Output unit"
+      },
+      "floor_in": {
+        "type": "boolean",
+        "required": false,
+        "description": "Floor input dates to unit boundary",
+        "default": true,
+        "arg_name": "floor_in",
+        "label": "Floor input"
+      },
+      "add_one": {
+        "type": "boolean",
+        "required": false,
+        "description": "Add one day to duration",
+        "default": true,
+        "arg_name": "add_one",
+        "label": "Add one day"
+      },
+      "trunc_out": {
+        "type": "boolean",
+        "required": false,
+        "description": "Truncate output to integer",
+        "default": false,
+        "arg_name": "trunc_out",
+        "label": "Truncate output"
+      },
+      "type": {
+        "type": "enum",
+        "required": false,
+        "description": "Type of duration calculation",
+        "default": "duration",
+        "values": [
+          {
+            "value": "duration",
+            "label": "Duration",
+            "description": "Calculate as duration"
+          },
+          {
+            "value": "interval",
+            "label": "Interval",
+            "description": "Calculate as interval"
+          }
+        ],
+        "arg_name": "type",
+        "label": "Calculation type"
+      }
+    },
+    "fn_name": "derive_vars_duration"
+  },
+  "derive_var_extreme_flag": {
+    "label": "Extreme flag",
+    "description": "Flag first or last record per group",
+    "group": "Flags",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "Flag within each group separately",
+        "default": null,
+        "arg_name": "by_vars",
+        "label": "Group by"
+      },
+      "order": {
+        "type": "column-list",
+        "required": true,
+        "description": "Sort order to determine first/last",
+        "default": null,
+        "arg_name": "order",
+        "label": "Order by"
+      },
+      "new_var": {
+        "type": "column",
+        "required": true,
+        "description": "Name for the new flag variable",
+        "default": null,
+        "arg_name": "new_var",
+        "label": "Flag variable"
+      },
+      "mode": {
+        "type": "enum",
+        "required": true,
+        "description": "Flag the first or last record",
+        "default": null,
+        "values": [
+          {
+            "value": "first",
+            "label": "Select first record",
+            "description": "Flag the first record per group"
+          },
+          {
+            "value": "last",
+            "label": "Select last record",
+            "description": "Flag the last record per group"
+          }
+        ],
+        "arg_name": "mode",
+        "label": "Flag which record"
+      },
+      "true_value": {
+        "type": "text",
+        "required": false,
+        "description": "Value for flagged records (default: Y)",
+        "default": "Y",
+        "arg_name": "true_value",
+        "label": "Flagged value"
+      },
+      "false_value": {
+        "type": "text",
+        "required": false,
+        "description": "Value for non-flagged records",
+        "default": null,
+        "arg_name": "false_value",
+        "label": "Unflagged value"
+      },
+      "flag_all": {
+        "type": "boolean",
+        "required": false,
+        "description": "Flag all records when tied",
+        "default": false,
+        "arg_name": "flag_all",
+        "label": "Flag all ties"
+      },
+      "check_type": {
+        "type": "enum",
+        "required": false,
+        "description": "How to handle unexpected duplicates",
+        "default": "warning",
+        "values": [
+          {
+            "value": "none",
+            "label": "No checks",
+            "description": "No duplicate checks"
+          },
+          {
+            "value": "message",
+            "label": "Show message",
+            "description": "Show informational message for duplicates"
+          },
+          {
+            "value": "warning",
+            "label": "Show warning",
+            "description": "Show warning for duplicates"
+          },
+          {
+            "value": "error",
+            "label": "Raise error",
+            "description": "Raise error for duplicates"
+          }
+        ],
+        "arg_name": "check_type",
+        "label": "Duplicate check"
+      }
+    },
+    "fn_name": "derive_var_extreme_flag"
+  },
+  "derive_var_anrind": {
+    "label": "Normal range indicator",
+    "description": "Derive analysis normal range indicator (ANRIND)",
+    "group": "Flags",
+    "needs_dataset_add": false,
+    "args": {
+      "signif_dig": {
+        "type": "numeric",
+        "required": false,
+        "description": "Significant digits for comparison",
+        "default": null,
+        "arg_name": "signif_dig",
+        "label": "Significant digits"
+      },
+      "use_a1hia1lo": {
+        "type": "boolean",
+        "required": false,
+        "description": "Use A1HI/A1LO instead of ANRHI/ANRLO",
+        "default": false,
+        "arg_name": "use_a1hia1lo",
+        "label": "Use A1HI/A1LO"
+      }
+    },
+    "fn_name": "derive_var_anrind"
+  },
+  "derive_var_obs_number": {
+    "label": "Observation number",
+    "description": "Add analysis sequence number (ASEQ)",
+    "group": "Flags",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": false,
+        "description": "Restart numbering within each group",
+        "default": null,
+        "arg_name": "by_vars",
+        "label": "Number within"
+      },
+      "order": {
+        "type": "column-list",
+        "required": false,
+        "description": "Sort order for numbering",
+        "default": null,
+        "arg_name": "order",
+        "label": "Number by"
+      },
+      "new_var": {
+        "type": "column",
+        "required": false,
+        "description": "Name for sequence variable (default: ASEQ)",
+        "default": null,
+        "arg_name": "new_var",
+        "label": "Sequence variable"
+      },
+      "check_type": {
+        "type": "enum",
+        "required": false,
+        "description": "How to handle unexpected duplicates",
+        "default": "none",
+        "values": [
+          {
+            "value": "none",
+            "label": "No checks",
+            "description": "No duplicate checks"
+          },
+          {
+            "value": "message",
+            "label": "Show message",
+            "description": "Show informational message for duplicates"
+          },
+          {
+            "value": "warning",
+            "label": "Show warning",
+            "description": "Show warning for duplicates"
+          },
+          {
+            "value": "error",
+            "label": "Raise error",
+            "description": "Raise error for duplicates"
+          }
+        ],
+        "arg_name": "check_type",
+        "label": "Duplicate check"
+      }
+    },
+    "fn_name": "derive_var_obs_number"
+  },
+  "derive_var_base": {
+    "label": "Baseline value",
+    "description": "Derive baseline value from flagged records",
+    "group": "Baseline",
+    "needs_dataset_add": false,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "Derive baseline within each group",
+        "default": null,
+        "arg_name": "by_vars",
+        "label": "Baseline per"
+      },
+      "source_var": {
+        "type": "column",
+        "required": false,
+        "description": "Variable to take baseline from (default: AVAL)",
+        "default": null,
+        "arg_name": "source_var",
+        "label": "Value variable"
+      },
+      "new_var": {
+        "type": "column",
+        "required": false,
+        "description": "Name for baseline variable (default: BASE)",
+        "default": null,
+        "arg_name": "new_var",
+        "label": "Baseline variable"
+      },
+      "filter": {
+        "type": "expr",
+        "required": false,
+        "description": "Which records are baseline (default: ABLFL == 'Y')",
+        "default": null,
+        "arg_name": "filter",
+        "label": "Baseline filter"
+      }
+    },
+    "fn_name": "derive_var_base"
+  },
+  "derive_vars_merged": {
+    "label": "Merge variables",
+    "description": "Add variables from another dataset by merging",
+    "group": "Merge & Lookup",
+    "needs_dataset_add": true,
+    "args": {
+      "by_vars": {
+        "type": "column-list",
+        "required": true,
+        "description": "Merge key variables",
+        "default": null,
+        "arg_name": "by_vars",
+        "label": "Join by"
+      },
+      "order": {
+        "type": "column-list",
+        "required": false,
+        "description": "Sort order when multiple matches",
+        "default": null,
+        "arg_name": "order",
+        "label": "Tie-breaking order"
+      },
+      "new_vars": {
+        "type": "expr",
+        "required": false,
+        "description": "Variables to add from second dataset",
+        "default": null,
+        "arg_name": "new_vars",
+        "label": "Columns to add"
+      },
+      "filter_add": {
+        "type": "expr",
+        "required": false,
+        "description": "Filter applied to the additional dataset",
+        "default": null,
+        "arg_name": "filter_add",
+        "label": "Filter second dataset"
+      },
+      "mode": {
+        "type": "enum",
+        "required": false,
+        "description": "Keep first or last matching record",
+        "default": null,
+        "values": [
+          {
+            "value": "first",
+            "label": "Select first record",
+            "description": "Select the first matching record"
+          },
+          {
+            "value": "last",
+            "label": "Select last record",
+            "description": "Select the last matching record"
+          }
+        ],
+        "arg_name": "mode",
+        "label": "If multiple matches"
+      },
+      "exist_flag": {
+        "type": "column",
+        "required": false,
+        "description": "Variable to flag whether a match was found",
+        "default": null,
+        "arg_name": "exist_flag",
+        "label": "Match flag variable"
+      },
+      "true_value": {
+        "type": "text",
+        "required": false,
+        "description": "Value when match exists",
+        "default": "Y",
+        "arg_name": "true_value",
+        "label": "Match found value"
+      },
+      "false_value": {
+        "type": "text",
+        "required": false,
+        "description": "Value when no match exists",
+        "default": null,
+        "arg_name": "false_value",
+        "label": "No match value"
+      },
+      "missing_values": {
+        "type": "expr",
+        "required": false,
+        "description": "Default values for unmatched records",
+        "default": null,
+        "arg_name": "missing_values",
+        "label": "Fill missing with"
+      },
+      "check_type": {
+        "type": "enum",
+        "required": false,
+        "description": "How to handle unexpected duplicates",
+        "default": "warning",
+        "values": [
+          {
+            "value": "none",
+            "label": "No checks",
+            "description": "No duplicate checks"
+          },
+          {
+            "value": "message",
+            "label": "Show message",
+            "description": "Show informational message for duplicates"
+          },
+          {
+            "value": "warning",
+            "label": "Show warning",
+            "description": "Show warning for duplicates"
+          },
+          {
+            "value": "error",
+            "label": "Raise error",
+            "description": "Raise error for duplicates"
+          }
+        ],
+        "arg_name": "check_type",
+        "label": "Duplicate check"
+      },
+      "duplicate_msg": {
+        "type": "text",
+        "required": false,
+        "description": "Custom message for duplicate warning",
+        "default": null,
+        "arg_name": "duplicate_msg",
+        "label": "Duplicate message"
+      },
+      "relationship": {
+        "type": "enum",
+        "required": false,
+        "description": "Expected cardinality of the merge",
+        "default": null,
+        "values": [
+          {
+            "value": "one-to-one",
+            "label": "One-to-one",
+            "description": "Each key matches at most one record"
+          },
+          {
+            "value": "many-to-one",
+            "label": "Many-to-one",
+            "description": "Multiple records can match one record"
+          }
+        ],
+        "arg_name": "relationship",
+        "label": "Expected relationship"
+      }
+    },
+    "fn_name": "derive_vars_merged"
+  }
+}

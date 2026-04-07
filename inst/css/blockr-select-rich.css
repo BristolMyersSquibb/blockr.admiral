@@ -1,0 +1,234 @@
+/* =========================================================================
+   Blockr.SelectRich — searchable select with rich dropdown items
+   Reusable — extract to blockr.core when needed
+   ========================================================================= */
+
+.blockr-srich {
+  position: relative;
+  width: 100%;
+  font-family: inherit;
+  font-size: var(--blockr-font-size-base, 0.875rem);
+  line-height: 1.5;
+  outline: none;
+}
+
+/* --- Control area --- */
+.blockr-srich__control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 2px 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.blockr-srich__value {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.blockr-srich__value-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.blockr-srich__value-primary {
+  font-size: var(--blockr-font-size-base, 0.875rem);
+  font-weight: var(--blockr-font-weight-medium, 500);
+  color: var(--blockr-color-text-primary, #111827);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.blockr-srich__value-secondary {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: var(--blockr-font-size-xs, 0.75rem);
+  color: var(--blockr-grey-400, #9ca3af);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.blockr-srich__value--placeholder {
+  color: var(--blockr-grey-400, #9ca3af);
+  font-weight: normal;
+}
+
+.blockr-srich__search {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  color: var(--blockr-color-text-primary, #111827);
+  padding: 0 8px;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.blockr-srich--open .blockr-srich__search {
+  width: 100%;
+  opacity: 1;
+}
+
+.blockr-srich__search::placeholder {
+  color: var(--blockr-grey-400, #9ca3af);
+}
+
+.blockr-srich__arrow {
+  display: flex;
+  align-items: center;
+  color: var(--blockr-grey-400, #9ca3af);
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.blockr-srich--open .blockr-srich__arrow {
+  transform: rotate(180deg);
+}
+
+/* --- Dropdown --- */
+.blockr-srich__dropdown {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin-top: 4px;
+  min-width: 350px;
+  max-height: 360px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid var(--blockr-color-border, #e5e7eb);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 9999;
+}
+
+.blockr-srich--open .blockr-srich__dropdown {
+  display: block;
+}
+
+.blockr-srich--above .blockr-srich__dropdown {
+  top: auto;
+  bottom: 100%;
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+/* --- Group headers --- */
+.blockr-srich__group-header {
+  padding: 10px 16px 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--blockr-grey-400, #6b7280);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  user-select: none;
+  border-top: 1px solid #f0f0f0;
+}
+
+.blockr-srich__group-header:first-child {
+  border-top: none;
+}
+
+/* --- Option items (icon + content row) --- */
+.blockr-srich__option {
+  padding: 8px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 2px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.blockr-srich__option--highlighted,
+.blockr-srich__option:hover {
+  background-color: var(--blockr-grey-50, #f3f4f6);
+}
+
+.blockr-srich__option--selected {
+  background-color: rgba(37, 99, 235, 0.04);
+}
+
+.blockr-srich__option--selected.blockr-srich__option--highlighted {
+  background-color: rgba(37, 99, 235, 0.08);
+}
+
+/* Colored icon square */
+.blockr-srich__option-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background set inline from group color */
+}
+
+/* Text content */
+.blockr-srich__option-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Header: label + category badge */
+.blockr-srich__option-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.blockr-srich__option-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--blockr-color-text-primary, #111827);
+}
+
+.blockr-srich__option-meta {
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 10px;
+  border-radius: 4px;
+  background: rgba(148, 163, 184, 0.1);
+  color: rgba(100, 116, 139, 0.9);
+  border: 1px solid rgba(100, 116, 139, 0.1);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Description line */
+.blockr-srich__option-desc {
+  font-size: 12px;
+  color: var(--blockr-grey-500, #6b7280);
+  line-height: 1.4;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Empty state */
+.blockr-srich__empty {
+  padding: 16px;
+  color: var(--blockr-grey-400, #9ca3af);
+  font-size: var(--blockr-font-size-base, 0.875rem);
+  text-align: center;
+}
