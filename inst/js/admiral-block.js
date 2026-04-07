@@ -41,13 +41,9 @@
       this.card.className = 'admiral-card';
       this.el.appendChild(this.card);
 
-      // Top row: function selector + gear button
-      const topRow = document.createElement('div');
-      topRow.className = 'admiral-top-row';
-
+      // Function selector (full width)
       const fnWrap = document.createElement('div');
       fnWrap.className = 'admiral-fn-wrap';
-      topRow.appendChild(fnWrap);
 
       this._fnSelect = Blockr.SelectRich.create(fnWrap, {
         items: [],
@@ -68,7 +64,16 @@
         }
       });
 
-      // Gear button
+      this.card.appendChild(fnWrap);
+
+      // Required args area
+      this.requiredEl = document.createElement('div');
+      this.requiredEl.className = 'admiral-required-args';
+      this.card.appendChild(this.requiredEl);
+
+      // Gear button (below required args, right-aligned)
+      const gearHeader = document.createElement('div');
+      gearHeader.className = 'blockr-gear-header admiral-gear-below';
       this.gearBtn = document.createElement('button');
       this.gearBtn.type = 'button';
       this.gearBtn.className = 'blockr-gear-btn';
@@ -79,14 +84,8 @@
         e.stopPropagation();
         this._togglePopover();
       });
-      topRow.appendChild(this.gearBtn);
-
-      this.card.appendChild(topRow);
-
-      // Required args area
-      this.requiredEl = document.createElement('div');
-      this.requiredEl.className = 'admiral-required-args';
-      this.card.appendChild(this.requiredEl);
+      gearHeader.appendChild(this.gearBtn);
+      this.card.appendChild(gearHeader);
 
       // Popover for optional args
       this.popoverEl = document.createElement('div');
@@ -395,7 +394,8 @@
         label: def.label || fn,
         meta: def.group || null,
         group: def.group || null,
-        description: fn + (def.description ? ' — ' + def.description : '')
+        description: fn + (def.description ? ' — ' + def.description : ''),
+        icon: def.icon || null
       }));
       this._fnSelect.setItems(items);
     }

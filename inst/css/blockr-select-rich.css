@@ -40,6 +40,9 @@
   height: 22px;
   border-radius: 4px;
   flex-shrink: 0;
+  background: #fff;
+  border: 1px solid var(--blockr-grey-200, #e5e7eb);
+  /* border-color set inline from group color */
 }
 
 .blockr-srich__value-primary {
@@ -171,7 +174,7 @@
   background-color: rgba(37, 99, 235, 0.08);
 }
 
-/* Colored icon square */
+/* Icon square — white bg, colored border + icon */
 .blockr-srich__option-icon {
   flex-shrink: 0;
   width: 36px;
@@ -180,7 +183,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background set inline from group color */
+  background: #fff;
+  border: 1px solid var(--blockr-grey-200, #e5e7eb);
+  /* border-color set inline from group color */
 }
 
 /* Text content */

@@ -127,12 +127,13 @@
       const item = getSelectedItem();
       if (item) {
         valueEl.classList.remove('blockr-srich__value--placeholder');
-        // Compact icon
+        // Compact icon — white bg, colored border + per-item icon
         const color = getGroupColor(item.group || item.meta);
         const iconEl = document.createElement('span');
         iconEl.className = 'blockr-srich__value-icon';
-        iconEl.style.background = hexToRgba(color, 0.15);
-        iconEl.innerHTML = makeSvg(color, 12);
+        iconEl.style.borderColor = color;
+        const itemIconPath = item.icon || iconPath;
+        iconEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="${color}" viewBox="0 0 16 16">${itemIconPath}</svg>`;
         valueEl.appendChild(iconEl);
         // Primary: human label
         const primary = document.createElement('span');
@@ -186,12 +187,13 @@
         opt.setAttribute('role', 'option');
         opt.setAttribute('data-value', item.value);
 
-        // Colored icon square
+        // Icon square — white bg, colored border + per-item or default icon
         const color = getGroupColor(item.group || item.meta);
         const iconEl = document.createElement('div');
         iconEl.className = 'blockr-srich__option-icon';
-        iconEl.style.background = hexToRgba(color, 0.15);
-        iconEl.innerHTML = makeSvg(color, 18);
+        iconEl.style.borderColor = color;
+        const itemIconPath = item.icon || iconPath;
+        iconEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="${color}" viewBox="0 0 16 16">${itemIconPath}</svg>`;
         opt.appendChild(iconEl);
 
         // Content: header + description

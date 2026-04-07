@@ -8,17 +8,14 @@
   position: relative;
 }
 
-/* --- Top row: function selector + gear --- */
-.admiral-top-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
+/* --- Gear below required args, with extra spacing --- */
+.admiral-gear-below {
+  margin-top: 8px;
 }
 
+/* --- Function selector (full width, below gear) --- */
 .admiral-fn-wrap {
-  flex: 1;
-  min-width: 0;
+  margin-bottom: 8px;
 }
 
 /* Make function selector bordered */

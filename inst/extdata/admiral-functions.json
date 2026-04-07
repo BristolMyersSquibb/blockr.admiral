@@ -5,7 +5,8 @@
     "group": "Simple Derivations",
     "needs_dataset_add": false,
     "args": {},
-    "fn_name": "derive_var_chg"
+    "fn_name": "derive_var_chg",
+    "icon": "<path d=\"M4 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-2-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5\"/>"
   },
   "derive_var_pchg": {
     "label": "Percent change",
@@ -13,7 +14,8 @@
     "group": "Simple Derivations",
     "needs_dataset_add": false,
     "args": {},
-    "fn_name": "derive_var_pchg"
+    "fn_name": "derive_var_pchg",
+    "icon": "<path d=\"M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0M4.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m7 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3\"/>"
   },
   "derive_var_trtdurd": {
     "label": "Treatment duration",
@@ -38,7 +40,8 @@
         "label": "Treatment end"
       }
     },
-    "fn_name": "derive_var_trtdurd"
+    "fn_name": "derive_var_trtdurd",
+    "icon": "<path d=\"M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z\"/><path d=\"M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0\"/>"
   },
   "derive_var_age_years": {
     "label": "Age in years",
@@ -71,7 +74,8 @@
         "label": "Output variable"
       }
     },
-    "fn_name": "derive_var_age_years"
+    "fn_name": "derive_var_age_years",
+    "icon": "<path d=\"M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4c0 1-1 1-1 1z\"/><path fill-rule=\"evenodd\" d=\"M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5\"/>"
   },
   "derive_var_analysis_ratio": {
     "label": "Analysis ratio",
@@ -104,7 +108,8 @@
         "label": "Ratio variable"
       }
     },
-    "fn_name": "derive_var_analysis_ratio"
+    "fn_name": "derive_var_analysis_ratio",
+    "icon": "<path d=\"M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-3h4v-1H2V8h4V7H2V4h4V3H2V1h4V0zm9 11h6v1h-6zm0-4h6v1h-6zm0-4h6v1h-6z\"/>"
   },
   "derive_vars_dt": {
     "label": "Parse date",
@@ -258,7 +263,8 @@
         "label": "Preserve original"
       }
     },
-    "fn_name": "derive_vars_dt"
+    "fn_name": "derive_vars_dt",
+    "icon": "<path d=\"M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z\"/>"
   },
   "derive_vars_dtm": {
     "label": "Parse datetime",
@@ -440,7 +446,8 @@
         "label": "Ignore seconds flag"
       }
     },
-    "fn_name": "derive_vars_dtm"
+    "fn_name": "derive_vars_dtm",
+    "icon": "<path d=\"M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z\"/><path d=\"M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z\"/>"
   },
   "derive_vars_dtm_to_dt": {
     "label": "Datetime to date",
@@ -457,7 +464,8 @@
         "label": "Source variables"
       }
     },
-    "fn_name": "derive_vars_dtm_to_dt"
+    "fn_name": "derive_vars_dtm_to_dt",
+    "icon": "<path d=\"M6.646 11.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 0 1 .708.708L7.707 11l1.647 1.646a.5.5 0 0 1-.708.708zM3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z\"/>"
   },
   "derive_vars_dtm_to_tm": {
     "label": "Datetime to time",
@@ -474,7 +482,8 @@
         "label": "Source variables"
       }
     },
-    "fn_name": "derive_vars_dtm_to_tm"
+    "fn_name": "derive_vars_dtm_to_tm",
+    "icon": "<path d=\"M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z\"/><path d=\"M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0\"/>"
   },
   "derive_vars_dy": {
     "label": "Study day",
@@ -499,7 +508,8 @@
         "label": "Date variables"
       }
     },
-    "fn_name": "derive_vars_dy"
+    "fn_name": "derive_vars_dy",
+    "icon": "<path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/><path d=\"M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0\"/>"
   },
   "derive_vars_duration": {
     "label": "Duration",
@@ -664,7 +674,8 @@
         "label": "Calculation type"
       }
     },
-    "fn_name": "derive_vars_duration"
+    "fn_name": "derive_vars_duration",
+    "icon": "<path d=\"M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z\"/><path d=\"M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64l.292-.292a.5.5 0 0 1 .708.708l-.4.4A6.5 6.5 0 1 1 6.5 1m0 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11\"/>"
   },
   "derive_var_extreme_flag": {
     "label": "Extreme flag",
@@ -771,7 +782,8 @@
         "label": "Duplicate check"
       }
     },
-    "fn_name": "derive_var_extreme_flag"
+    "fn_name": "derive_var_extreme_flag",
+    "icon": "<path d=\"M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12 12 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A20 20 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a20 20 0 0 0 1.349-.476l.019-.007.004-.002h.001\"/>"
   },
   "derive_var_anrind": {
     "label": "Normal range indicator",
@@ -796,7 +808,8 @@
         "label": "Use A1HI/A1LO"
       }
     },
-    "fn_name": "derive_var_anrind"
+    "fn_name": "derive_var_anrind",
+    "icon": "<path d=\"M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z\"/>"
   },
   "derive_var_obs_number": {
     "label": "Observation number",
@@ -859,7 +872,8 @@
         "label": "Duplicate check"
       }
     },
-    "fn_name": "derive_var_obs_number"
+    "fn_name": "derive_var_obs_number",
+    "icon": "<path d=\"M12.438 1.668V7H11.39V2.684h-.051l-1.211.859v-.969l1.262-.906h1.046zM4.5 2h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1\"/>"
   },
   "derive_var_base": {
     "label": "Baseline value",
@@ -900,7 +914,8 @@
         "label": "Baseline filter"
       }
     },
-    "fn_name": "derive_var_base"
+    "fn_name": "derive_var_base",
+    "icon": "<path d=\"M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5\"/>"
   },
   "derive_vars_merged": {
     "label": "Merge variables",
@@ -1051,6 +1066,7 @@
         "label": "Expected relationship"
       }
     },
-    "fn_name": "derive_vars_merged"
+    "fn_name": "derive_vars_merged",
+    "icon": "<path fill-rule=\"evenodd\" d=\"M6 7.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5\"/><path d=\"M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z\"/>"
   }
 }
