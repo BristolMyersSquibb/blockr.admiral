@@ -45,7 +45,7 @@ This lets users see both what the option means and what value gets sent to admir
 
 ### Form layout (not row builder)
 
-Unlike seasonal (add/remove argument rows) or dplyr (add/remove condition/mutation rows), admiral uses a fixed form layout — arguments are predetermined by the selected function. The layout is:
+Unlike dplyr (add/remove condition/mutation rows), admiral uses a fixed form layout — arguments are predetermined by the selected function. The layout is:
 
 ```
 [ Function selector ]           ← Blockr.SelectRich, bordered, 42px
@@ -58,14 +58,21 @@ Unlike seasonal (add/remove argument rows) or dplyr (add/remove condition/mutati
 
                            [⚙]  ← gear button, right-aligned, 8px margin-top
 
-  ── popover ──────────────      ← optional args
-  Human label        [ input ]
-  ────────────────────────
+  ┌─ popover ─────────────┐     ← inline below gear, full width
+  │ Human label   [ input ]│       not absolute/overlay
+  │ code_name              │
+  └────────────────────────┘
 ```
 
-### Popover dropdown alignment
+### Popover is inline, not absolute
 
-Inside the gear popover (positioned `right: 0`), SelectRich and Select dropdowns open right-aligned (`right: 0; left: auto`) to avoid overflowing the panel edge.
+The gear popover is rendered in normal document flow below the gear button — not absolutely positioned. It spans the full width of the block (`left: 0; right: 0` not needed since it's inline). Dropdowns inside it are left-aligned and also full width.
+
+This differs from the dplyr popover pattern (absolute, right-anchored, fixed min-width). The inline approach avoids overflow issues and keeps the gear button always visible.
+
+### All inputs match the 42px standard
+
+Text inputs, expression inputs, bordered selects, and column selects all use `min-height: 42px` with `padding: 10px 14px`. This matches blockr.dock's standard form control sizing. No special reduced heights for admiral — all inputs are visually consistent.
 
 ### Inputs inherit font
 

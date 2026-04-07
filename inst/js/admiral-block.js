@@ -89,7 +89,7 @@
 
       // Popover for optional args
       this.popoverEl = document.createElement('div');
-      this.popoverEl.className = 'blockr-popover admiral-popover';
+      this.popoverEl.className = 'admiral-popover';
       this.popoverEl.style.display = 'none';
       this.card.appendChild(this.popoverEl);
 

@@ -80,8 +80,8 @@
 .admiral-text-input,
 .admiral-expr-input {
   width: 100%;
-  height: 34px;
-  padding: 6px 10px;
+  min-height: 42px;
+  padding: 10px 14px;
   font: inherit;
   font-size: var(--blockr-font-size-base, 0.875rem);
   background-color: var(--blockr-color-bg-input, #f9fafb);
@@ -117,12 +117,14 @@
   color: var(--blockr-grey-500, #6b7280);
 }
 
-/* --- Popover positioning (full width of block) --- */
+/* --- Popover (inline below gear, not absolute) --- */
 .admiral-popover {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: auto;
+  margin-top: 4px;
+  background: #ffffff;
+  border: 1px solid var(--blockr-color-border, #e5e7eb);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 12px 14px;
 }
 
 .admiral-popover .admiral-arg-row {
