@@ -36,7 +36,7 @@ new_admiral_block <- function(
         # Send column names when data changes
         observeEvent(data(), {
           session$sendCustomMessage("admiral-columns",
-            list(id = ns("admiral_input"), columns = colnames(data())))
+            list(id = ns("admiral_input"), columns = as.list(colnames(data()))))
         })
 
         # JS -> R
@@ -120,12 +120,12 @@ new_admiral_join_block <- function(
         # Send column names from both datasets
         observeEvent(data(), {
           session$sendCustomMessage("admiral-columns",
-            list(id = ns("admiral_input"), columns = colnames(data())))
+            list(id = ns("admiral_input"), columns = as.list(colnames(data()))))
         })
 
         observeEvent(dataset_add(), {
           session$sendCustomMessage("admiral-columns-add",
-            list(id = ns("admiral_input"), columns = colnames(dataset_add())))
+            list(id = ns("admiral_input"), columns = as.list(colnames(dataset_add()))))
         })
 
         # JS -> R
