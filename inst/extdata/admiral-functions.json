@@ -239,7 +239,7 @@
         "label": "Flag imputation"
       },
       "min_dates": {
-        "type": "expr",
+        "type": "column-list",
         "required": false,
         "description": "Minimum dates for imputation",
         "default": null,
@@ -247,7 +247,7 @@
         "label": "Minimum dates"
       },
       "max_dates": {
-        "type": "expr",
+        "type": "column-list",
         "required": false,
         "description": "Maximum dates for imputation",
         "default": null,
@@ -414,7 +414,7 @@
         "label": "Flag imputation"
       },
       "min_dates": {
-        "type": "expr",
+        "type": "column-list",
         "required": false,
         "description": "Minimum dates for imputation",
         "default": null,
@@ -422,7 +422,7 @@
         "label": "Minimum dates"
       },
       "max_dates": {
-        "type": "expr",
+        "type": "column-list",
         "required": false,
         "description": "Maximum dates for imputation",
         "default": null,
@@ -456,7 +456,7 @@
     "needs_dataset_add": false,
     "args": {
       "source_vars": {
-        "type": "expr",
+        "type": "column-list",
         "required": true,
         "description": "Datetime variables to convert (e.g., ADTM, ASTDTM)",
         "default": null,
@@ -474,7 +474,7 @@
     "needs_dataset_add": false,
     "args": {
       "source_vars": {
-        "type": "expr",
+        "type": "column-list",
         "required": true,
         "description": "Datetime variables to convert",
         "default": null,
@@ -500,7 +500,7 @@
         "label": "Reference date"
       },
       "source_vars": {
-        "type": "expr",
+        "type": "column-list",
         "required": true,
         "description": "Date columns to compute study days for",
         "default": null,

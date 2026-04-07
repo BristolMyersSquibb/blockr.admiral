@@ -225,6 +225,7 @@
         placeholder: argDef.description || 'Select column\u2026',
         onChange: () => this._autoSubmit()
       });
+      sel.el.classList.add('blockr-select--bordered');
       return {
         type: 'column',
         component: sel,
@@ -242,6 +243,7 @@
         reorderable: true,
         onChange: () => this._autoSubmit()
       });
+      sel.el.classList.add('blockr-select--bordered');
       return {
         type: 'column-list',
         component: sel,

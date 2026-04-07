@@ -117,27 +117,26 @@
   color: var(--blockr-grey-500, #6b7280);
 }
 
-/* --- Popover positioning --- */
+/* --- Popover positioning (full width of block) --- */
 .admiral-popover {
   position: absolute;
+  left: 0;
   right: 0;
-  top: 40px;
-  min-width: 320px;
+  top: auto;
 }
 
 .admiral-popover .admiral-arg-row {
   padding: 2px 0;
 }
 
-/* SelectRich dropdowns inside popover must open left-aligned to popover, not overflow right */
+/* Dropdowns inside popover fill full width */
 .admiral-popover .blockr-srich__dropdown {
+  left: 0;
   right: 0;
-  left: auto;
-  min-width: 250px;
+  min-width: 0;
 }
 
-/* Regular Select dropdowns inside popover too */
 .admiral-popover .blockr-select__dropdown {
+  left: 0;
   right: 0;
-  left: auto;
 }
