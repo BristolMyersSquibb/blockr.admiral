@@ -17,9 +17,11 @@ Imports:
     shiny,
     blockr.core (>= 0.0.1),
     admiral,
+    rlang,
     jsonlite,
     htmltools
 Suggests:
     testthat (>= 3.0.0),
-    safetyData
+    safetyData,
+    pharmaversesdtm
 Config/testthat/edition: 3

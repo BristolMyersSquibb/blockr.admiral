@@ -24,6 +24,7 @@
     const placeholder = config.placeholder || 'Select\u2026';
     const onChange = config.onChange || null;
     const groupColors = config.groupColors || {};
+    const hasIcons = Object.keys(groupColors).length > 0;
     const iconPath = config.iconPath || '<path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07"/>';
     const defaultColor = '#64748b';
     let _isOpen = false;
@@ -127,14 +128,16 @@
       const item = getSelectedItem();
       if (item) {
         valueEl.classList.remove('blockr-srich__value--placeholder');
-        // Compact icon — white bg, colored border + per-item icon
-        const color = getGroupColor(item.group || item.meta);
-        const iconEl = document.createElement('span');
-        iconEl.className = 'blockr-srich__value-icon';
-        iconEl.style.borderColor = color;
-        const itemIconPath = item.icon || iconPath;
-        iconEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="${color}" viewBox="0 0 16 16">${itemIconPath}</svg>`;
-        valueEl.appendChild(iconEl);
+        // Compact icon (only when groupColors configured)
+        if (hasIcons) {
+          const color = getGroupColor(item.group || item.meta);
+          const iconEl = document.createElement('span');
+          iconEl.className = 'blockr-srich__value-icon';
+          iconEl.style.borderColor = color;
+          const itemIconPath = item.icon || iconPath;
+          iconEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="${color}" viewBox="0 0 16 16">${itemIconPath}</svg>`;
+          valueEl.appendChild(iconEl);
+        }
         // Primary: human label
         const primary = document.createElement('span');
         primary.className = 'blockr-srich__value-primary';
@@ -187,14 +190,16 @@
         opt.setAttribute('role', 'option');
         opt.setAttribute('data-value', item.value);
 
-        // Icon square — white bg, colored border + per-item or default icon
-        const color = getGroupColor(item.group || item.meta);
-        const iconEl = document.createElement('div');
-        iconEl.className = 'blockr-srich__option-icon';
-        iconEl.style.borderColor = color;
-        const itemIconPath = item.icon || iconPath;
-        iconEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="${color}" viewBox="0 0 16 16">${itemIconPath}</svg>`;
-        opt.appendChild(iconEl);
+        // Icon square (only when groupColors configured)
+        if (hasIcons) {
+          const color = getGroupColor(item.group || item.meta);
+          const iconEl = document.createElement('div');
+          iconEl.className = 'blockr-srich__option-icon';
+          iconEl.style.borderColor = color;
+          const itemIconPath = item.icon || iconPath;
+          iconEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="${color}" viewBox="0 0 16 16">${itemIconPath}</svg>`;
+          opt.appendChild(iconEl);
+        }
 
         // Content: header + description
         const content = document.createElement('div');
@@ -207,6 +212,14 @@
         label.className = 'blockr-srich__option-label';
         label.textContent = item.label || item.value;
         header.appendChild(label);
+
+        // Show actual value in mono when different from label
+        if (item.value && item.label && item.value !== item.label) {
+          const code = document.createElement('span');
+          code.className = 'blockr-srich__option-code';
+          code.textContent = item.value;
+          header.appendChild(code);
+        }
 
         if (item.meta) {
           const meta = document.createElement('span');

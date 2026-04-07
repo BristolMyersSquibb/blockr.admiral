@@ -7,14 +7,15 @@
 # admiral blocks for the ADaM derivation steps. Includes a merge block
 # that joins EX (exposure) data into the main pipeline.
 #
-# Prerequisites: pharmaversesdtm, blockr.dock, blockr.dplyr, blockr.dag
+# Prerequisites: pharmaversesdtm, blockr.dock, blockr.dplyr, blockr.dag, blockr.ai
 
 library(blockr.core)
-# library(blockr.admiral)
+pkgload::load_all("blockr.admiral")
 library(blockr.dplyr)
 library(blockr.dock)
 library(blockr.dag)
-pkgload::load_all("blockr.admiral")
+library(blockr.ai)
+
 serve(
   new_dock_board(
     blocks = c(
@@ -98,5 +99,6 @@ serve(
       list(from = "studyday", to = "aseq", input = "data")
     ),
     extensions = new_dag_extension()
-  )
+  ),
+  plugins = custom_plugins(c(ai_ctrl_block()))
 )

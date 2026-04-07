@@ -10,6 +10,7 @@ pkgload::load_all("blockr.admiral")
 library(blockr.dplyr)
 library(blockr.dock)
 library(blockr.dag)
+library(blockr.ai)
 
 options(shiny.port = 3838, shiny.host = "0.0.0.0")
 
@@ -96,5 +97,6 @@ serve(
       list(from = "studyday", to = "aseq", input = "data")
     ),
     extensions = new_dag_extension()
-  )
+  ),
+  plugins = custom_plugins(c(ai_ctrl_block()))
 )
