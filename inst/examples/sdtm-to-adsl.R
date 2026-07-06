@@ -24,12 +24,12 @@ serve(
       ex = new_dataset_block(dataset = "ex", package = "pharmaversesdtm"),
 
       # === Prep DM: add treatment variables ===
-      prep = new_mutate_block(state = list(
+      prep = new_mutate_block(
         mutations = list(
           list(name = "TRT01P", expr = "ARM"),
           list(name = "TRT01A", expr = "ACTARM")
         )
-      )),
+      ),
 
       # === Prep EX: parse exposure start dates ===
       ex_dates = new_admiral_block(state = list(
