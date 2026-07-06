@@ -18,6 +18,7 @@ blockr_pkgs <- c(
   "blockr.dplyr",
   "blockr.dock",
   "blockr.dag",
+  "blockr.extra",     # html table-preview glue (blockr.html_table_preview option)
   "blockr.ai"
 )
 
@@ -25,6 +26,8 @@ for (pkg in blockr_pkgs) {
   if (dev_local) pkgload::load_all(pkg, quiet = TRUE)
   else library(pkg, character.only = TRUE)
 }
+
+options(blockr.html_table_preview = TRUE)
 
 # SDTM source tables (dm, ex) come from pharmaversesdtm via new_dataset_block().
 library(pharmaversesdtm)   # SDTM example domains (dm, ex)
