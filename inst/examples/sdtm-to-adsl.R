@@ -1,20 +1,33 @@
-# Demo: SDTM DM → ADSL derivation pipeline
+# SDTM DM → ADSL derivation pipeline — a chained admiral pipeline in blockr.dock,
+# each block one derivation step with visible intermediate results. Prep DM with
+# blockr.dplyr, then admiral blocks for the ADaM steps, plus a merge that joins
+# EX (exposure) into the main pipeline. Run with:
 #
-# Comprehensive demo showing a chained admiral pipeline in blockr.dock.
-# Each block is one derivation step with visible intermediate results.
-#
-# Uses pharmaversesdtm for SDTM data, blockr.dplyr for prep, then
-# admiral blocks for the ADaM derivation steps. Includes a merge block
-# that joins EX (exposure) data into the main pipeline.
-#
-# Prerequisites: pharmaversesdtm, blockr.dock, blockr.dplyr, blockr.dag, blockr.ai
+#   source(system.file("examples/sdtm-to-adsl.R", package = "blockr.admiral"))
 
-library(blockr.core)
-pkgload::load_all("blockr.admiral")
-library(blockr.dplyr)
-library(blockr.dock)
-library(blockr.dag)
-library(blockr.ai)
+# ---- Package loading (dual: installed vs local source) ---------------------
+# `dev_local = FALSE` (the default, and what ships) attaches the INSTALLED
+# packages with library(). Set it to TRUE -- or source this file from the
+# dev/sdtm-to-adsl.R wrapper -- to load every blockr package from its LOCAL
+# source checkout with pkgload::load_all(). One board, two loaders, no drift.
+if (!exists("dev_local")) dev_local <- FALSE
+
+blockr_pkgs <- c(
+  "blockr.core",
+  "blockr.admiral",   # admiral derivation blocks (derive_vars_*, merge, seq)
+  "blockr.dplyr",
+  "blockr.dock",
+  "blockr.dag",
+  "blockr.ai"
+)
+
+for (pkg in blockr_pkgs) {
+  if (dev_local) pkgload::load_all(pkg, quiet = TRUE)
+  else library(pkg, character.only = TRUE)
+}
+
+# SDTM source tables (dm, ex) come from pharmaversesdtm via new_dataset_block().
+library(pharmaversesdtm)   # SDTM example domains (dm, ex)
 
 serve(
   new_dock_board(
