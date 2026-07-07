@@ -14,6 +14,7 @@ if (!exists("dev_local")) dev_local <- FALSE
 
 blockr_pkgs <- c(
   "blockr.core",
+  "blockr.session",   # project save / load / versions
   "blockr.admiral",   # admiral derivation blocks (derive_vars_*, merge, seq)
   "blockr.dplyr",
   "blockr.dock",
@@ -26,6 +27,21 @@ for (pkg in blockr_pkgs) {
   if (dev_local) pkgload::load_all(pkg, quiet = TRUE)
   else library(pkg, character.only = TRUE)
 }
+
+# ---- Curate the block browser ----------------------------------------------
+# Keep ONLY `dataset` and `glue` from blockr.core; drop its low-level / noise
+# blocks (subset, merge, rbind, head, scatter, csv, filebrowser, upload) via
+# unregister_blocks(), selecting by the registry `package` attribute so only
+# core blocks are affected.
+core_keep <- c("dataset_block", "glue_block")
+core_drop <- setdiff(
+  names(Filter(
+    function(entry) identical(attr(entry, "package"), "blockr.core"),
+    available_blocks()
+  )),
+  core_keep
+)
+unregister_blocks(core_drop)
 
 options(blockr.html_table_preview = TRUE)
 
@@ -116,5 +132,5 @@ serve(
     ),
     extensions = new_dag_extension()
   ),
-  plugins = custom_plugins(c(ai_ctrl_block()))
+  plugins = custom_plugins(c(ai_ctrl_block(), manage_project()))
 )
