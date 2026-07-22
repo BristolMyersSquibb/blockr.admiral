@@ -19,7 +19,7 @@ blockr_pkgs <- c(
   "blockr.dplyr",
   "blockr.dock",
   "blockr.dag",
-  "blockr.extra",     # html table-preview glue (blockr.html_table_preview option)
+  "blockr.extra",     # function / code blocks
   "blockr.ai"
 )
 
@@ -43,7 +43,7 @@ core_drop <- setdiff(
 )
 unregister_blocks(core_drop)
 
-options(blockr.html_table_preview = TRUE)
+options(blockr.tabular_display = blockr.ui::html_table_display)
 
 # SDTM source tables (dm, ex) come from pharmaversesdtm via new_dataset_block().
 library(pharmaversesdtm)   # SDTM example domains (dm, ex)
