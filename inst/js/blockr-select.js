@@ -1,3 +1,18 @@
+/*
+ * VENDORED FORK — do not patch this file in place.
+ * Frozen copy of blockr.dplyr's BlockrSelect, taken so this package need not
+ * Import blockr.dplyr. It has since drifted (~200 lines behind its origin)
+ * and is NOT kept in sync, so fixes landed in
+ * blockr.dplyr/inst/{css,js}/blockr-select.* never reach here — and grafting
+ * them across one at a time only deepens the fork.
+ * It is also inert wherever blockr.dplyr is also loaded: every copy registers
+ * htmlDependency(name = "blockr-select-css" / "blockr-select-js"), so htmltools
+ * dedupes to the highest version and blockr.dplyr (0.2.x) always beats 0.0.1.
+ * This copy therefore only applies in a standalone app for this package.
+ * PLAN: delete it and import the shared component once BlockrSelect moves to
+ * blockr.ui (which has no select component yet).
+ */
+
 /**
  * Blockr.Select — lightweight select component (single + multi)
  *
