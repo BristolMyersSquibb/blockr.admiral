@@ -48,89 +48,96 @@ options(blockr.tabular_display = blockr.ui::html_table_display)
 # SDTM source tables (dm, ex) come from pharmaversesdtm via new_dataset_block().
 library(pharmaversesdtm)   # SDTM example domains (dm, ex)
 
-serve(
-  new_dock_board(
-    blocks = c(
-      # === Data sources ===
-      dm = new_dataset_block(dataset = "dm", package = "pharmaversesdtm"),
-      ex = new_dataset_block(dataset = "ex", package = "pharmaversesdtm"),
+board <- new_dock_board(
+  blocks = c(
+    # === Data sources ===
+    dm = new_dataset_block(dataset = "dm", package = "pharmaversesdtm"),
+    ex = new_dataset_block(dataset = "ex", package = "pharmaversesdtm"),
 
-      # === Prep DM: add treatment variables ===
-      prep = new_mutate_block(
-        mutations = list(
-          list(name = "TRT01P", expr = "ARM"),
-          list(name = "TRT01A", expr = "ACTARM")
-        )
-      ),
-
-      # === Prep EX: parse exposure start dates ===
-      ex_dates = new_admiral_block(state = list(
-        fn = "derive_vars_dtm",
-        args = list(new_vars_prefix = "EXST", dtc = "EXSTDTC")
-      )),
-
-      # === Main pipeline ===
-
-      # Step 1: Parse reference start date
-      parse_rfst = new_admiral_block(state = list(
-        fn = "derive_vars_dt",
-        args = list(new_vars_prefix = "RFST", dtc = "RFSTDTC")
-      )),
-
-      # Step 2: Parse reference end date
-      parse_rfen = new_admiral_block(state = list(
-        fn = "derive_vars_dt",
-        args = list(new_vars_prefix = "RFEN", dtc = "RFENDTC")
-      )),
-
-      # Step 3: Merge first treatment date from EX
-      merge_trt = new_admiral_join_block(state = list(
-        fn = "derive_vars_merged",
-        args = list(
-          by_vars = list("STUDYID", "USUBJID"),
-          new_vars = "TRTSDTM = EXSTDTM",
-          order = "EXSTDTM, EXSEQ",
-          mode = "first"
-        )
-      )),
-
-      # Step 4: Treatment duration
-      trtdurd = new_admiral_block(state = list(
-        fn = "derive_var_trtdurd",
-        args = list(start_date = "RFSTDT", end_date = "RFENDT")
-      )),
-
-      # Step 5: Study days
-      studyday = new_admiral_block(state = list(
-        fn = "derive_vars_dy",
-        args = list(reference_date = "RFSTDT", source_vars = "RFSTDT, RFENDT")
-      )),
-
-      # Step 6: Sequence number
-      aseq = new_admiral_block(state = list(
-        fn = "derive_var_obs_number",
-        args = list()
-      ))
+    # === Prep DM: add treatment variables ===
+    prep = new_mutate_block(
+      mutations = list(
+        list(name = "TRT01P", expr = "ARM"),
+        list(name = "TRT01A", expr = "ACTARM")
+      )
     ),
-    links = list(
-      # DM prep pipeline
-      list(from = "dm", to = "prep", input = "data"),
-      list(from = "prep", to = "parse_rfst", input = "data"),
-      list(from = "parse_rfst", to = "parse_rfen", input = "data"),
 
-      # EX prep (separate branch)
-      list(from = "ex", to = "ex_dates", input = "data"),
+    # === Prep EX: parse exposure start dates ===
+    ex_dates = new_admiral_block(state = list(
+      fn = "derive_vars_dtm",
+      args = list(new_vars_prefix = "EXST", dtc = "EXSTDTC")
+    )),
 
-      # Merge: DM pipeline + EX dates → merge_trt (two inputs)
-      list(from = "parse_rfen", to = "merge_trt", input = "data"),
-      list(from = "ex_dates", to = "merge_trt", input = "dataset_add"),
+    # === Main pipeline ===
 
-      # Continue pipeline after merge
-      list(from = "merge_trt", to = "trtdurd", input = "data"),
-      list(from = "trtdurd", to = "studyday", input = "data"),
-      list(from = "studyday", to = "aseq", input = "data")
-    ),
-    extensions = new_dag_extension()
+    # Step 1: Parse reference start date
+    parse_rfst = new_admiral_block(state = list(
+      fn = "derive_vars_dt",
+      args = list(new_vars_prefix = "RFST", dtc = "RFSTDTC")
+    )),
+
+    # Step 2: Parse reference end date
+    parse_rfen = new_admiral_block(state = list(
+      fn = "derive_vars_dt",
+      args = list(new_vars_prefix = "RFEN", dtc = "RFENDTC")
+    )),
+
+    # Step 3: Merge first treatment date from EX
+    merge_trt = new_admiral_join_block(state = list(
+      fn = "derive_vars_merged",
+      args = list(
+        by_vars = list("STUDYID", "USUBJID"),
+        new_vars = "TRTSDTM = EXSTDTM",
+        order = "EXSTDTM, EXSEQ",
+        mode = "first"
+      )
+    )),
+
+    # Step 4: Treatment duration
+    trtdurd = new_admiral_block(state = list(
+      fn = "derive_var_trtdurd",
+      args = list(start_date = "RFSTDT", end_date = "RFENDT")
+    )),
+
+    # Step 5: Study days
+    studyday = new_admiral_block(state = list(
+      fn = "derive_vars_dy",
+      args = list(reference_date = "RFSTDT", source_vars = "RFSTDT, RFENDT")
+    )),
+
+    # Step 6: Sequence number
+    aseq = new_admiral_block(state = list(
+      fn = "derive_var_obs_number",
+      args = list()
+    ))
   ),
+  links = list(
+    # DM prep pipeline
+    list(from = "dm", to = "prep", input = "data"),
+    list(from = "prep", to = "parse_rfst", input = "data"),
+    list(from = "parse_rfst", to = "parse_rfen", input = "data"),
+
+    # EX prep (separate branch)
+    list(from = "ex", to = "ex_dates", input = "data"),
+
+    # Merge: DM pipeline + EX dates → merge_trt (two inputs)
+    list(from = "parse_rfen", to = "merge_trt", input = "data"),
+    list(from = "ex_dates", to = "merge_trt", input = "dataset_add"),
+
+    # Continue pipeline after merge
+    list(from = "merge_trt", to = "trtdurd", input = "data"),
+    list(from = "trtdurd", to = "studyday", input = "data"),
+    list(from = "studyday", to = "aseq", input = "data")
+  ),
+  extensions = new_dag_extension()
+)
+
+# The default layout's one view gets a random id as its tab label; name it.
+views <- blockr.dock::board_views(board)
+blockr.dock::view_name(views[[1]]) <- "Derivation"
+blockr.dock::board_views(board) <- views
+
+serve(
+  board,
   plugins = custom_plugins(c(ai_ctrl_block(), manage_project()))
 )
