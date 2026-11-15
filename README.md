@@ -1,6 +1,6 @@
 # blockr.admiral
 
-Visual blocks for [admiral](https://pharmaverse.github.io/admiral/) clinical data derivations. Part of the [blockr](https://blockr-org.github.io/blockr.site/) ecosystem.
+Visual blocks for [admiral](https://pharmaverse.github.io/admiral/) clinical data derivations. Part of the [blockr](https://blockr.site) ecosystem.
 
 ## Blocks
 
