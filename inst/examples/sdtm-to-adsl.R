@@ -19,7 +19,6 @@ blockr_pkgs <- c(
   "blockr.dplyr",
   "blockr.dock",
   "blockr.dag",
-  "blockr.extra",     # function / code blocks
   "blockr.ai"
 )
 
